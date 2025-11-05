@@ -4,7 +4,9 @@ const RestaurantInput = () => {
   return (
     <div className="h-full w-full bg-white/50 rounded-3xl shadow-xl backdrop-blur-sm border border-white/50 flex flex-col items-center justify-center gap-4 p-8">
       <button className="w-64 h-12 bg-[#b5d3dc] border border-white/50 rounded-2xl flex items-center justify-center gap-3 hover:bg-[#a5c3cc] transition-colors">
-        <span className="text-black text-2xl font-sf-pro">Upload Menu</span>
+        <span className="text-black text-2xl font-sf-pro font-size: 50px;">
+          Upload Menu
+        </span>
         <svg
           width="32"
           height="32"
