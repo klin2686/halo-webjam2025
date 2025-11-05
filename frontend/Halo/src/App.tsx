@@ -13,9 +13,9 @@ const App = () => {
       <div className="absolute inset-0 bg-white/25 z-0"></div>
 
       <div className="relative z-10 h-screen w-screen flex flex-col">
-        <div className="pt-4 px-8">
+        <div className="h-screen w-screen pt-4 px-8">
           <TopBar />
-          <div className="grid grid-cols-3 pt-4">
+          <div className="h-71/80 grid grid-cols-3 pt-4">
             <SideBar />
             <div className="grid grid-rows-2">
               <div>test</div>
