@@ -1,15 +1,24 @@
 import { useState, useEffect } from "react";
+import { useAuth } from "../contexts/AuthContext";
+import { storage } from "../utils/api";
 import AllergyCard from "./AllergyCard";
 import { fetchAllergies, defaultAllergyList } from "./AllergyList";
 import type { Allergy } from "./AllergyList";
 
 const AllergyBar = () => {
+  const { isAuthenticated } = useAuth();
   const [allergies, setAllergies] = useState<Allergy[]>(defaultAllergyList);
   const [loading, setLoading] = useState(true);
 
   const loadAllergies = async () => {
+    const accessToken = storage.getAccessToken();
+    if (!accessToken || !isAuthenticated) {
+      setLoading(false);
+      return;
+    }
+
     setLoading(true);
-    const data = await fetchAllergies();
+    const data = await fetchAllergies(accessToken);
     setAllergies(data);
     setLoading(false);
   };

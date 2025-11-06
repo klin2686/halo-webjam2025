@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useAuth } from "../contexts/AuthContext";
 import SideBarProfile from "./SideBarProfile";
 import SideBarElement from "./SideBarElement";
 import sidebarAccount from "../assets/sidebarAccount.svg";
@@ -11,11 +12,16 @@ import sidebarSignOut from "../assets/sidebarSignOut.svg";
 import defaultUser from "../assets/defaultUser.svg";
 
 const SideBar = () => {
+  const { user, logout } = useAuth();
   const [activeElement, setActiveElement] = useState<string>("Dashboard");
   const [indicatorStyle, setIndicatorStyle] = useState({ top: 0, height: 0 });
   const [isInitialized, setIsInitialized] = useState(false);
   const [isLifted, setIsLifted] = useState(false);
   const elementsRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+  const handleSignOut = () => {
+    logout();
+  };
 
   useEffect(() => {
     const activeRef = elementsRef.current[activeElement];
@@ -65,7 +71,10 @@ const SideBar = () => {
           />
         )}
 
-        <SideBarProfile picture={defaultUser} name="John Doe" />
+        <SideBarProfile
+          picture={user?.profile_picture || defaultUser}
+          name={user?.name || user?.email || "User"}
+        />
         <div className="flex justify-center w-full">
           <hr className="w-9/10 justify-center pt-[1rem]"></hr>
         </div>
@@ -149,7 +158,7 @@ const SideBar = () => {
           <SideBarElement
             element="Sign Out"
             logo={sidebarSignOut}
-            onClick={() => setActiveElement("Sign Out")}
+            onClick={handleSignOut}
             active={activeElement === "Sign Out"}
             isLifted={isLifted}
           />
