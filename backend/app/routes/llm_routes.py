@@ -145,6 +145,7 @@ def process_menu():
 
 @llm_bp.route('/process-manual-input', methods=['POST'])
 def process_manual():
+    """Parse and send a list of menu items to Gemini for processing"""
     data = request.get_json()
     if not data:
         return jsonify({'error': 'No json body provided'}), 400
