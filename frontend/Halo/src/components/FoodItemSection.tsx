@@ -32,12 +32,12 @@ const FoodItemCard = ({ item }: { item: FoodItem }) => {
   };
 
   return (
-    <div className="h-full w-full rounded-xl shadow-xl backdrop-blur-sm outline outline-1 outline-offset-[-1px] outline-white/50 overflow-y overflow-x p-4 relative inset-0">
+    <div className="h-full w-full rounded-xl shadow-xl backdrop-blur-sm outline outline-1 outline-offset-[-0.0625rem] outline-white/50 overflow-y overflow-x p-4 relative inset-0">
       <h1 className="text-2xl font-bold text-black font-sf-pro mb-3">
         {item.name}
       </h1>
 
-      <div className="absolute top-4 right-4 h-[18px] w-[76px] rounded-full overflow-hidden">
+      <div className="absolute top-4 right-4 h-[1.125rem] w-[4.75rem] rounded-full overflow-hidden">
         <div className={`h-full ${getConfidenceColor(item.confidence)}`}>
           <div
             className="h-full bg-[#d9d9d9] ml-auto"
@@ -46,7 +46,7 @@ const FoodItemCard = ({ item }: { item: FoodItem }) => {
         </div>
 
         <div className="absolute inset-0 bg-white/50 rounded-full flex items-center justify-center">
-          <span className="text-[11px] text-black font-sf-pro">
+          <span className="text-[0.6875rem] text-black font-sf-pro">
             {item.confidence}
           </span>
         </div>
@@ -56,7 +56,7 @@ const FoodItemCard = ({ item }: { item: FoodItem }) => {
         {item.allergens.map((allergen, index) => (
           <div
             key={index}
-            className={`h-[18px] px-3 rounded-full ${getSeverityColor(
+            className={`h-[1.125rem] px-3 rounded-full ${getSeverityColor(
               allergen.severity
             )} flex items-center gap-1`}
           >
@@ -69,7 +69,7 @@ const FoodItemCard = ({ item }: { item: FoodItem }) => {
                   : "bg-green-400"
               }`}
             />
-            <span className="text-[11px] text-black font-sf-pro">
+            <span className="text-[0.6875rem] text-black font-sf-pro">
               {allergen.name}
             </span>
           </div>
@@ -152,9 +152,9 @@ const FoodItemsSection = () => {
   ];
 
   return (
-    <div className="flex flex-col h-[38rem] w-full bg-white/50 rounded-3xl shadow-xl backdrop-blur-sm outline outline-1 outline-offset-[-1px] outline-white/50 overflow-hidden relative">
+    <div className="flex flex-col h-[38rem] w-full bg-white/50 rounded-3xl shadow-xl backdrop-blur-sm outline outline-1 outline-offset-[-0.0625rem] outline-white/50 overflow-hidden relative">
       <div className="absolute top-0 left-0 right-0 z-10 p-6 pb-3 pointer-events-none">
-        <div className="flex items-center w-full h-[50px] bg-white/10 border border-white/50 rounded-xl px-4 backdrop-blur-sm outline outline-1 outline-offset-[-1px] outline-white/50 pointer-events-auto">
+        <div className="flex items-center w-full h-[3.125rem] bg-white/10 border border-white/50 rounded-xl px-4 backdrop-blur-sm outline outline-1 outline-offset-[-0.0625rem] outline-white/50 pointer-events-auto">
           <input
             type="text"
             placeholder="Search..."
@@ -163,7 +163,7 @@ const FoodItemsSection = () => {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto overflow-x-visible no-scrollbar px-6 pt-[98px] pb-6">
+      <div className="flex-1 overflow-y-auto overflow-x-visible no-scrollbar px-6 pt-[6.125rem] pb-6">
         <div className="grid grid-cols-2 gap-6">
           {foodItems.map((item, index) => (
             <FoodItemCard key={index} item={item} />

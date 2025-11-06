@@ -8,7 +8,7 @@ interface SideBarProfileProps {
 const SideBarProfile = ({ picture, name }: SideBarProfileProps) => {
   return (
     <div className="flex flex-col items-center p-4">
-      <div className="bg-white/15 rounded-full shadow-xl backdrop-blur-sm outline outline-1 outline-offset-[-1px] outline-white/50 overflow-y overflow-x">
+      <div className="bg-white/15 rounded-full shadow-xl backdrop-blur-sm outline outline-1 outline-offset-[-0.0625rem] outline-white/50 overflow-y overflow-x">
         <img
           src={picture}
           alt={`${name} profile`}

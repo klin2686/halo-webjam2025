@@ -3,7 +3,7 @@ import AllergyCard from "./AllergyCard";
 
 const AllergyBar = () => {
   return (
-    <div className="h-full w-full relative bg-white/50 rounded-3xl shadow-xl backdrop-blur-sm outline outline-1 outline-offset-[-1px] outline-white/50 overflow-y overflow-x">
+    <div className="h-full w-full relative bg-white/50 rounded-3xl shadow-xl backdrop-blur-sm outline outline-1 outline-offset-[-0.0625rem] outline-white/50 overflow-y overflow-x">
       <div className="flex flex-col justify-start items-center p-4">
         <div className="pt-10 flex justify-center text-black font-sf-pro font-semibold text-3xl">
           My Allergies
