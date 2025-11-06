@@ -41,11 +41,11 @@ def process_menu():
     response = client.models.generate_content(
         model="gemini-2.5-flash",
         contents=[
+            gemini_prompt,
             types.Part.from_bytes(
                 data=image_bytes,
                 mime_type='image/jpeg',
-            ),
-            gemini_prompt
+            )
         ],
         config={
             "response_mime_type": "application/json",

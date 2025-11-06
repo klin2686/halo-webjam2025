@@ -18,6 +18,7 @@ def get_allergy(current_user):
         'user_allergy': [user_allergy.to_dict() for user_allergy in user_allergies]
     }), 200
 
+
 @allergy_bp.route('/allergy/add', methods=['POST'])
 @token_required
 def add_allergy(current_user):
