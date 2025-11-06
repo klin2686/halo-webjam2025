@@ -82,6 +82,7 @@ const FoodItems = () => {
         ["Peanuts", "severe"],
         ["Dairy", "moderate"],
         ["Gluten", "mild"],
+        ["Gluten", "mild"],
       ],
     },
   ];
