@@ -18,7 +18,7 @@ const App = () => {
       <div className="relative z-10 h-screen w-screen flex flex-col">
         <div className="h-full w-full pt-4 px-8">
           <TopBar />
-          <div className="h-[calc(100%-5rem-1rem)] grid grid-cols-[2fr_6fr_3fr] gap-4 pt-4">
+          <div className="h-[calc(100%-5rem-1rem)] grid grid-cols-[4fr_10fr_5fr] gap-4 pt-4">
             <SideBar />
             <div className="grid grid-rows-[1fr_3fr] gap-4">
               <RestaurantInput />

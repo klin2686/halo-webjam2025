@@ -22,8 +22,8 @@ const SideBarElement = ({
       }`}
       onClick={onClick}
     >
-      <img src={logo} alt={`${element} icon`} className="w-6 h-6" />
-      <div className="text-black text-sm font-sf-pro pl-4">{element}</div>
+      <img src={logo} alt={`${element} icon`} className="w-6 h-6 ml-4" />
+      <div className="text-black text-md font-sf-pro pl-4">{element}</div>
     </div>
   );
 };
