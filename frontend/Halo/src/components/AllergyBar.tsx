@@ -30,7 +30,7 @@ const AllergyBar = () => {
         </div>
 
         {loading ? (
-          <div className="text-black/50 font-sf-pro text-lg py-4">
+          <div className="text-black/50 font-sf-pro font-bold text-lg py-4">
             Loading allergies...
           </div>
         ) : (
@@ -56,7 +56,7 @@ const AllergyBar = () => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
+              <path // Minus Button
                 d="M4 10H16"
                 stroke="#56BECC"
                 strokeWidth="3"
@@ -73,7 +73,7 @@ const AllergyBar = () => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
+              <path // Plus Button
                 d="M10 4V16M4 10H16"
                 stroke="#56BECC"
                 strokeWidth="3"

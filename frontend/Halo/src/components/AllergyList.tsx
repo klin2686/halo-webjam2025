@@ -1,9 +1,11 @@
+// What we want to use in frontend
 export interface Allergy {
   id: number;
   allergen: string;
   severity: string;
 }
 
+// List of allergy item data from backend
 interface AllergyItem {
   id: number;
   allergen_id: number;
@@ -12,6 +14,7 @@ interface AllergyItem {
   user_id: number;
 }
 
+//This is the backend response
 interface AllergyAPIResponse {
   message: string;
   user_allergy: AllergyItem[];
