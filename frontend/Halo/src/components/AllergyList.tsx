@@ -1,11 +1,9 @@
-// What we want to use in frontend
 export interface Allergy {
   id: number;
   allergen: string;
   severity: string;
 }
 
-// List of allergy item data from backend
 interface AllergyItem {
   id: number;
   allergen_id: number;
@@ -14,7 +12,6 @@ interface AllergyItem {
   user_id: number;
 }
 
-//This is the backend response
 interface AllergyAPIResponse {
   message: string;
   user_allergy: AllergyItem[];
@@ -39,15 +36,15 @@ export const defaultAllergyList: Allergy[] = [
   { id: 3, allergen: "Soy", severity: "mild" },
 ];
 
-export const fetchAllergies = async (): Promise<Allergy[]> => {
+export const fetchAllergies = async (accessToken: string): Promise<Allergy[]> => {
   try {
+    const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
     const response = await fetch(
-      "https://wj-api-dev-ff3daf2f73bd.herokuapp.com/api/allergy/get",
+      `${API_BASE_URL}/allergy/get`,
       {
         method: "GET",
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NjI1OTc4ODUsImlhdCI6MTc2MjQyNTA4NSwidHlwZSI6ImFjY2VzcyJ9.7ZqUFKWLxHuoyXOUT_ug9X1Inn1O5lZeEgSdf9v0Ed8",
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
