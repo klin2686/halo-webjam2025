@@ -152,3 +152,52 @@ export const storage = {
     storage.clearUser();
   },
 };
+
+// Menu Processing API
+
+export interface MenuItem {
+  item_name: string;
+  common_allergens: string[];
+  confidence_score: number;
+}
+
+export type MenuProcessResponse = MenuItem[];
+
+export const menuAPI = {
+  processMenuImage: async (imageFile: File): Promise<MenuProcessResponse> => {
+    const formData = new FormData();
+    formData.append('menu_image', imageFile);
+
+    const url = `${API_BASE_URL}/process-menu`;
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new APIError(
+          response.status,
+          data.error || 'Failed to process menu image'
+        );
+      }
+
+      return data as MenuProcessResponse;
+    } catch (error) {
+      if (error instanceof APIError) {
+        throw error;
+      }
+      throw new Error('Network error. Please check your connection.');
+    }
+  },
+
+  processManualInput: async (menuItems: string[]): Promise<MenuProcessResponse> => {
+    return fetchAPI<MenuProcessResponse>('/process-manual-input', {
+      method: 'POST',
+      body: JSON.stringify({ menu_items: menuItems }),
+    });
+  },
+};

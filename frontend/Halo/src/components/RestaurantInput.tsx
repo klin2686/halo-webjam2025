@@ -1,4 +1,5 @@
 import React from "react";
+import { menuAPI } from "../utils/api";
 
 const RestaurantInput = () => {
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -9,28 +10,14 @@ const RestaurantInput = () => {
   }
 
   const handleUpload = async (file: File) => {
-    const formData = new FormData();
-    formData.append('menu_image', file)
-
     try {
-      const response = await fetch(
-        'https://wj-api-dev-ff3daf2f73bd.herokuapp.com/api/process-menu',
-        {
-          method: 'POST',
-          body: formData
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-
-      const data = await response.json();
+      const data = await menuAPI.processMenuImage(file);
       console.log('Success:', data);
-
+      // TODO: Pass data (MenuItem[]) to FoodItems component
     } catch (error) {
       console.error('Upload failed:', error);
-      alert('Upload failed!');
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      alert(`Upload failed: ${errorMessage}`);
     }
   }
 
