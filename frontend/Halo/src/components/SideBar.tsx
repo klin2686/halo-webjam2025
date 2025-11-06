@@ -158,7 +158,7 @@ const SideBar = () => {
         <div className="flex justify-center w-full">
           <hr className="w-9/10 justify-center pt-[1rem]"></hr>
         </div>
-        <div className="flex flex-col justify-end absolute bottom-0 w-full p-[1rem]">
+        <div className="flex flex-col justify-center bottom-0 w-full p-[1rem]">
           <SideBarElement
             element="Dark Mode"
             logo={sidebarColor}

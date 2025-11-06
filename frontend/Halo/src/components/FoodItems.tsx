@@ -82,6 +82,11 @@ const FoodItems = () => {
         ["Peanuts", "severe"],
         ["Dairy", "moderate"],
         ["Gluten", "mild"],
+        ["Gluten", "mild"],
+        ["Gluten", "mild"],
+        ["Gluten", "mild"],
+        ["Gluten", "mild"],
+        ["Gluten", "mild"],
       ],
     },
   ];
@@ -110,7 +115,7 @@ const FoodItems = () => {
             />
           ))
         ) : (
-          <div className="col-span-2 flex items-center justify-center text-black/50 font-sf-pro text-xl">
+          <div className="col-span-2 flex items-center justify-center text-black/50 font-sf-pro text-xl font-bold">
             No food items found
           </div>
         )}
