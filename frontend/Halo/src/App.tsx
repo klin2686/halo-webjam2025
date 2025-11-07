@@ -1,49 +1,25 @@
 import { useAuth } from "./contexts/AuthContext";
 import TopBar from "./components/TopBar";
-import backgroundImage from "./assets/background.jpg";
 import SideBar from "./components/SideBar";
-import RestaurantInput from "./components/RestaurantInput";
-import FoodItemsSection from "./components/FoodItems";
-import AllergyBar from "./components/AllergyBar";
+import backgroundImage from "./assets/background.jpg";
 import UserLogin from "./components/UserLogin";
+import Loading from "./components/Loading";
+import Dashboard from "./components/Dashboard";
+import History from "./components/History";
 import { useState } from "react";
-import { type MenuItem } from "./utils/api";
-import { type Allergy } from "./components/AllergyList";
+import Account from "./components/Account";
 
 const App = () => {
   const { isAuthenticated, isLoading } = useAuth();
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-  const [userAllergies, setUserAllergies] = useState<Allergy[]>([]);
+  const [currentScreen, setCurrentScreen] = useState<String>("Dashboard");
 
   if (isLoading) {
-    return (
-      <div
-        className="h-screen w-screen flex items-center justify-center bg-cover bg-center bg-no-repeat bg-fixed relative"
-        style={{
-          backgroundImage: `url(${backgroundImage})`,
-        }}
-      >
-        <div className="absolute inset-0 bg-white/25 z-0"></div>
-        <div className="relative z-10">
-          <div className="text-black/50 font-sf-pro font-bold text-3xl">
-            Loading...
-          </div>
-        </div>
-      </div>
-    );
+    return <Loading />;
   }
 
   if (!isAuthenticated) {
     return <UserLogin />;
   }
-
-  const transformMenuItems = (items: MenuItem[]) => {
-    return items.map((item) => ({
-      food: item.item_name,
-      confidence: item.confidence_score,
-      allergens: item.common_allergens,
-    }));
-  };
 
   return (
     <div
@@ -56,16 +32,15 @@ const App = () => {
 
       <div className="relative z-10 h-full w-full flex flex-col p-[2rem] gap-[1rem]">
         <TopBar />
-        <div className="flex-1 grid grid-cols-[4fr_10fr_5fr] gap-[1rem] min-h-0">
-          <SideBar />
-          <div className="grid grid-rows-[1fr_3fr] gap-[1rem] min-h-0">
-            <RestaurantInput onMenuProcessed={setMenuItems} />
-            <FoodItemsSection
-              items={transformMenuItems(menuItems)}
-              allergies={userAllergies}
-            />
-          </div>
-          <AllergyBar onAllergiesLoaded={setUserAllergies} />
+        <div className={`flex-1 grid gap-[1rem] min-h-0 ${currentScreen === "Dashboard" ? "grid-cols-[minmax(250px,320px)_1fr_minmax(300px,400px)]" : "grid-cols-[minmax(250px,320px)_1fr]"}`}>
+          <SideBar onScreenChange={setCurrentScreen} />
+          {currentScreen === "Dashboard" ? (
+            <Dashboard />
+          ) : currentScreen === "History" ? (
+            <History />
+          ) : (
+            <Account />
+          )}
         </div>
       </div>
     </div>

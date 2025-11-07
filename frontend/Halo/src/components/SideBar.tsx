@@ -4,15 +4,17 @@ import SideBarProfile from "./SideBarProfile";
 import SideBarElement from "./SideBarElement";
 import SideBarSwitch from "./SideBarSwitch";
 import sidebarAccount from "../assets/sidebarAccount.svg";
-import sidebarAllergies from "../assets/sidebarAllergies.svg";
 import sidebarColor from "../assets/sidebarColor.svg";
 import sidebarDashboard from "../assets/sidebarDashboard.svg";
 import sidebarHistory from "../assets/sidebarHistory.svg";
-import sidebarSettings from "../assets/sidebarSettings.svg";
 import sidebarSignOut from "../assets/sidebarSignOut.svg";
 import defaultUser from "../assets/defaultUser.svg";
 
-const SideBar = () => {
+interface SideBarProps {
+  onScreenChange?: (screen: string) => void;
+}
+
+const SideBar = ({ onScreenChange }: SideBarProps) => {
   const { user, logout } = useAuth();
   const [activeElement, setActiveElement] = useState<string>("Dashboard");
   const [indicatorStyle, setIndicatorStyle] = useState({ top: 0, height: 0 });
@@ -95,7 +97,10 @@ const SideBar = () => {
             <SideBarElement
               element="Dashboard"
               logo={sidebarDashboard}
-              onClick={() => setActiveElement("Dashboard")}
+              onClick={() => {
+                setActiveElement("Dashboard");
+                onScreenChange?.("Dashboard");
+              }}
               active={activeElement === "Dashboard"}
               isLifted={isLifted}
             />
@@ -108,7 +113,10 @@ const SideBar = () => {
             <SideBarElement
               element="History"
               logo={sidebarHistory}
-              onClick={() => setActiveElement("History")}
+              onClick={() => {
+                setActiveElement("History");
+                onScreenChange?.("History");
+              }}
               active={activeElement === "History"}
               isLifted={isLifted}
             />
@@ -126,7 +134,10 @@ const SideBar = () => {
             <SideBarElement
               element="Account"
               logo={sidebarAccount}
-              onClick={() => setActiveElement("Account")}
+              onClick={() => {
+                setActiveElement("Account");
+                onScreenChange?.("Account");
+              }}
               active={activeElement === "Account"}
               isLifted={isLifted}
             />

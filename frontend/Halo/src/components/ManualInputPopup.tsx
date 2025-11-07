@@ -82,7 +82,7 @@ const ManualInputPopup = ({ onClose, onMenuProcessed, onSubmitStart, onSubmitEnd
           ></textarea>
           <button
             onClick={handleSubmit}
-            className="bg-[#56BECC]/80 hover:bg-[#56BECC] transition-colors backdrop-blur-sm text-white font-sf-pro font-semibold py-3 px-8 rounded-xl shadow-xl"
+            className="bg-[#56BECC]/80 hover:bg-[#56BECC] transition-colors backdrop-blur-sm text-white font-sf-pro font-semibold py-3 px-8 rounded-xl shadow-xl cursor-pointer"
           >
             Submit
           </button>

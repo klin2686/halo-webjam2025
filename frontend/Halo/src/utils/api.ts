@@ -161,6 +161,14 @@ export interface MenuItem {
   confidence_score: number;
 }
 
+export interface MenuHistoryItem {
+  id: number;
+  user_id: number;
+  upload_name: string;
+  analysis_result: MenuItem[];
+  created_at: string;
+}
+
 export type MenuProcessResponse = MenuItem[];
 
 export const menuAPI = {
@@ -201,6 +209,15 @@ export const menuAPI = {
     return fetchAPI<MenuProcessResponse>('/process-manual-input', {
       method: 'POST',
       body: JSON.stringify({ menu_name: menuName, menu_items: menuItems }),
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  },
+
+  getMenuHistory: async (accessToken: string): Promise<MenuHistoryItem[]> => {
+    return fetchAPI<MenuHistoryItem[]>('/menu-uploads', {
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
