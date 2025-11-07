@@ -84,7 +84,7 @@ const SideBar = () => {
             name={user?.name || user?.email || "User"}
           />
           <div className="flex justify-center w-full">
-            <hr className="w-9/10 justify-center pt-[1rem]"></hr>
+            <hr className="w-9/10 justify-center pt-[1rem] opacity-40"></hr>
           </div>
 
           <div
@@ -129,7 +129,7 @@ const SideBar = () => {
 
           <br></br>
           <div className="flex justify-center w-full">
-            <hr className="w-9/10 justify-center pt-[1rem]"></hr>
+            <hr className="w-9/10 justify-center pt-[1rem] opacity-40"></hr>
           </div>
 
           <div
@@ -175,7 +175,7 @@ const SideBar = () => {
 
         <div className="flex flex-col mt-auto">
           <div className="flex justify-center w-full">
-            <hr className="w-9/10 justify-center pt-[1rem]"></hr>
+            <hr className="w-9/10 justify-center pt-[1rem] opacity-40"></hr>
           </div>
           <div className="flex flex-col justify-center w-full p-[1rem]">
             <SideBarSwitch

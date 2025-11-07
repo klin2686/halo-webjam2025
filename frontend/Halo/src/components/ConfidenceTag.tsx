@@ -26,12 +26,12 @@ const ConfidenceTag = ({ confidence, text }: ConfidenceTagProps) => {
 
   return (
     <div
-      className={`h-[1.125rem] w-[5rem] rounded-full ${getConfidenceColor(
+      className={`h-[1.225rem] w-[5rem] rounded-full ${getConfidenceColor(
         confidence
       )} flex items-center justify-center`}
     >
       <div
-        className={`h-[0.875rem] w-[4.750rem] rounded-full ${getDotColor(
+        className={`h-[0.975rem] w-[4.700rem] rounded-full ${getDotColor(
           confidence
         )} flex items-center justify-center`}
       >

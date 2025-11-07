@@ -65,7 +65,7 @@ const AllergyBar = ({ onAllergiesLoaded }: AllergyBarProps) => {
         </div>
         <br></br>
         <div className="flex justify-center w-full">
-          <hr className="w-9/10 justify-center pt-[1rem]"></hr>
+          <hr className="w-9/10 justify-center pt-[1rem] opacity-40"></hr>
         </div>
 
         {loading ? (
