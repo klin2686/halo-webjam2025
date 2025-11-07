@@ -4,6 +4,19 @@ export interface Allergy {
   severity: string;
 }
 
+// Standard allergens from backend
+export const STANDARD_ALLERGENS = [
+  "milk",
+  "eggs",
+  "fish",
+  "shellfish",
+  "tree nuts",
+  "peanuts",
+  "wheat",
+  "soybeans",
+  "sesame",
+];
+
 interface AllergyItem {
   id: number;
   allergen_id: number;
@@ -29,25 +42,25 @@ const severityToString = (severity: number): string => {
       return "mild";
   }
 };
-
+//testpush
 export const defaultAllergyList: Allergy[] = [
   { id: 1, allergen: "Peanuts", severity: "severe" },
   { id: 2, allergen: "Shellfish", severity: "moderate" },
   { id: 3, allergen: "Soy", severity: "mild" },
 ];
 
-export const fetchAllergies = async (accessToken: string): Promise<Allergy[]> => {
+export const fetchAllergies = async (
+  accessToken: string
+): Promise<Allergy[]> => {
   try {
-    const API_BASE_URL = 'https://wj-api-dev-ff3daf2f73bd.herokuapp.com/api';
-    const response = await fetch(
-      `${API_BASE_URL}/allergy/get`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
+    const API_BASE_URL =
+      import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+    const response = await fetch(`${API_BASE_URL}/allergy/get`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

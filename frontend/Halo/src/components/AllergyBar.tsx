@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { storage } from "../utils/api";
 import AllergyCard from "./AllergyCard";
+import AddAllergyPopup from "./AddAllergyPopup";
 import { fetchAllergies, defaultAllergyList } from "./AllergyList";
 import type { Allergy } from "./AllergyList";
 
@@ -13,6 +14,7 @@ const AllergyBar = ({ onAllergiesLoaded }: AllergyBarProps) => {
   const { isAuthenticated } = useAuth();
   const [allergies, setAllergies] = useState<Allergy[]>(defaultAllergyList);
   const [loading, setLoading] = useState(true);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const loadAllergies = async () => {
     const accessToken = storage.getAccessToken();
@@ -79,7 +81,10 @@ const AllergyBar = ({ onAllergiesLoaded }: AllergyBarProps) => {
             </svg>
           </button>
 
-          <button className="w-[3rem] h-[3rem] backdrop-blur-sm border border-white/50 rounded-full flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all">
+          <button
+            onClick={() => setIsPopupOpen(true)}
+            className="w-[3rem] h-[3rem] backdrop-blur-sm border border-white/50 rounded-full flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all"
+          >
             <svg
               width="20"
               height="20"
@@ -97,6 +102,13 @@ const AllergyBar = ({ onAllergiesLoaded }: AllergyBarProps) => {
           </button>
         </div>
       </div>
+
+      {/* Add Allergy Popup */}
+      <AddAllergyPopup
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+        existingAllergies={allergies}
+      />
     </div>
   );
 };
