@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { useAuth } from "../contexts/AuthContext";
 import { storage } from "../utils/api";
 import AllergyCard from "./AllergyCard";
 import AddAllergyPopup from "./AddAllergyPopup";
 import { fetchAllergies, defaultAllergyList } from "./AllergyList";
 import type { Allergy } from "./AllergyList";
+import { iconButtonVariants } from "../utils/animations";
 
 interface AllergyBarProps {
   onAllergiesLoaded?: (allergies: Allergy[]) => void;
@@ -88,11 +90,15 @@ const AllergyBar = ({ onAllergiesLoaded }: AllergyBarProps) => {
 
         <div
           key={allergies.length}
-          className="flex gap-[1rem] mt-[1rem] mb-[1rem] w-full justify-center transition-all duration-300 ease-in-out"
+          className="flex gap-[1rem] mt-[1rem] mb-[1rem] w-full justify-center"
         >
-          <button
+          <motion.button
             onClick={() => setIsActive(!isActive)}
-            className="cursor-pointer w-[3rem] h-[3rem] backdrop-blur-sm border border-white/50 rounded-full flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all"
+            className="cursor-pointer w-[3rem] h-[3rem] backdrop-blur-sm border border-white/50 rounded-full flex items-center justify-center shadow-xl"
+            initial="initial"
+            whileHover="hover"
+            whileTap="tap"
+            variants={iconButtonVariants}
           >
             <svg
               width="20"
@@ -120,11 +126,15 @@ const AllergyBar = ({ onAllergiesLoaded }: AllergyBarProps) => {
                 />
               )}
             </svg>
-          </button>
+          </motion.button>
 
-          <button
+          <motion.button
             onClick={() => setIsPopupOpen(true)}
-            className="cursor-pointer w-[3rem] h-[3rem] backdrop-blur-sm border border-white/50 rounded-full flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all"
+            className="cursor-pointer w-[3rem] h-[3rem] backdrop-blur-sm border border-white/50 rounded-full flex items-center justify-center shadow-xl"
+            initial="initial"
+            whileHover="hover"
+            whileTap="tap"
+            variants={iconButtonVariants}
           >
             <svg
               width="20"
@@ -140,7 +150,7 @@ const AllergyBar = ({ onAllergiesLoaded }: AllergyBarProps) => {
                 strokeLinecap="round"
               />
             </svg>
-          </button>
+          </motion.button>
         </div>
       </div>
 

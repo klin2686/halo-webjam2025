@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { menuAPI, storage, type MenuItem } from "../utils/api";
 import LoadingSpinner from "./LoadingSpinner";
 import ManualInputPopup from "./ManualInputPopup";
 import MiniHistory from "./MiniHistory";
+import { buttonGlowVariants } from "../utils/animations";
 
 interface RestaurantInputProps {
   onMenuProcessed: (items: MenuItem[]) => void;
@@ -78,9 +80,13 @@ const RestaurantInput = ({ onMenuProcessed, onSeeAllClick }: RestaurantInputProp
               style={{ display: 'none' }}
               id="file-input"
             />
-            <button
+            <motion.button
               onClick={() => document.getElementById('file-input')?.click()}
               className="cursor-pointer justify-between w-full h-full border backdrop-blur-sm border-white/50 rounded-2xl flex items-center justify-center gap-[0.75rem] shadow-xl"
+              initial="initial"
+              whileHover="hover"
+              whileTap="tap"
+              variants={buttonGlowVariants}
             >
               <span className="text-black text-xl font-sf-pro w-32">Upload Menu</span>
               <svg
@@ -99,10 +105,14 @@ const RestaurantInput = ({ onMenuProcessed, onSeeAllClick }: RestaurantInputProp
                   strokeLinecap="round"
                 />
               </svg>
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               onClick={() => setShowManualInput(true)}
               className="cursor-pointer justify-between w-full h-full backdrop-blur-sm border border-white/50 rounded-2xl flex items-center justify-center gap-[0.75rem] shadow-xl"
+              initial="initial"
+              whileHover="hover"
+              whileTap="tap"
+              variants={buttonGlowVariants}
             >
               <span className="text-black text-xl font-sf-pro w-32">Manual Input</span>
               <svg
@@ -120,7 +130,7 @@ const RestaurantInput = ({ onMenuProcessed, onSeeAllClick }: RestaurantInputProp
                   strokeLinecap="round"
                 />
               </svg>
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>

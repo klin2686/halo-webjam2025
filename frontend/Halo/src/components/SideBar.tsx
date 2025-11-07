@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 import { useAuth } from "../contexts/AuthContext";
 import SideBarProfile from "./SideBarProfile";
 import SideBarElement from "./SideBarElement";
@@ -9,6 +10,7 @@ import sidebarDashboard from "../assets/sidebarDashboard.svg";
 import sidebarHistory from "../assets/sidebarHistory.svg";
 import sidebarSignOut from "../assets/sidebarSignOut.svg";
 import defaultUser from "../assets/defaultUser.svg";
+import { sidebarVariants } from "../utils/animations";
 
 interface SideBarProps {
   currentScreen?: string;
@@ -70,7 +72,12 @@ const SideBar = ({ currentScreen, onScreenChange }: SideBarProps) => {
   }, []);
 
   return (
-    <div className="h-full w-full relative bg-white/50 rounded-3xl shadow-xl backdrop-blur-sm outline outline-1 outline-offset-[-0.0625rem] outline-white/50 overflow-y overflow-x">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={sidebarVariants}
+      className="h-full w-full relative bg-white/50 rounded-3xl shadow-xl backdrop-blur-sm outline outline-1 outline-offset-[-0.0625rem] outline-white/50 overflow-y overflow-x"
+    >
       <div className="flex flex-col justify-between h-full p-[1rem]">
         {isInitialized && (
           <div
@@ -178,7 +185,7 @@ const SideBar = ({ currentScreen, onScreenChange }: SideBarProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

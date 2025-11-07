@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 interface ConfidenceTagProps {
   confidence: number;
   text: string;
@@ -25,7 +27,13 @@ const ConfidenceTag = ({ confidence, text }: ConfidenceTagProps) => {
   };
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        duration: 0.3,
+        ease: [0.4, 0, 0.2, 1],
+      }}
       className={`h-[1.225rem] w-[5rem] rounded-full ${getConfidenceColor(
         confidence
       )} flex items-center justify-center`}
@@ -40,7 +48,7 @@ const ConfidenceTag = ({ confidence, text }: ConfidenceTagProps) => {
           {text}
         </span>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

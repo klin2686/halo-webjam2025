@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 interface SideBarSwitchProps {
   element: string;
   logo: string;
@@ -25,10 +27,16 @@ const SideBarSwitch = ({
           isOn ? "bg-sky-500/50" : "bg-gray-300/50"
         } outline outline-1 outline-offset-[-0.0625rem] outline-white/50`}
       >
-        <div
-          className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-md transition-transform duration-300 ${
-            isOn ? "translate-x-6" : "translate-x-0"
-          }`}
+        <motion.div
+          className="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-md"
+          animate={{
+            x: isOn ? 24 : 0,
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 300,
+            damping: 30,
+          }}
         />
       </div>
     </div>

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { useAuth } from "../contexts/AuthContext";
 import { useGoogleLogin } from "@react-oauth/google";
 import backgroundImage from "../assets/background.jpg";
 import haloLogo from "../assets/haloLogo.svg";
+import { pageLoadVariants, logoHoverVariants, buttonScaleVariants } from "../utils/animations";
 
 const UserLogin = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -83,13 +85,22 @@ const UserLogin = () => {
     >
       <div className="absolute inset-0 bg-white/25 z-0"></div>
 
-      <div className="relative z-10 w-full max-w-md mx-4">
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={pageLoadVariants}
+        className="relative z-10 w-full max-w-md mx-4"
+      >
         <div className="bg-white/50 rounded-3xl shadow-xl backdrop-blur-sm outline outline-1 outline-offset-[-0.0625rem] outline-white/50 p-8">
           <div className="flex flex-col items-center mb-8 overflow-x overflow-y">
-            <img
+            <motion.img
               src={haloLogo}
               alt="Logo"
               className="w-[8rem] h-[8rem] overflow-x overflow-y"
+              initial="initial"
+              animate="initial"
+              whileHover="hover"
+              variants={logoHoverVariants}
             />
             <div className="text-black text-4xl font-sf-pro font-bold mt-2">
               Halo
@@ -168,10 +179,14 @@ const UserLogin = () => {
               )}
             </div>
 
-            <button
+            <motion.button
               type="submit"
               disabled={isSubmitting || isLoading}
               className="cursor-pointer w-full py-3 bg-sky-500/50 rounded-xl border border-white/50 text-black font-sf-pro font-bold text-lg shadow-xl"
+              initial="initial"
+              whileHover="hover"
+              whileTap="tap"
+              variants={buttonScaleVariants}
             >
               {isSubmitting || isLoading ? (
                 <span className="flex items-center justify-center">
@@ -202,7 +217,7 @@ const UserLogin = () => {
               ) : (
                 "Create Account"
               )}
-            </button>
+            </motion.button>
           </form>
 
           <div className="flex items-center my-6">
@@ -255,7 +270,7 @@ const UserLogin = () => {
             </p>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

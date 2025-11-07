@@ -1,4 +1,5 @@
 import { useAuth } from "./contexts/AuthContext";
+import { motion, AnimatePresence } from "framer-motion";
 import TopBar from "./components/TopBar";
 import SideBar from "./components/SideBar";
 import backgroundImage from "./assets/background.jpg";
@@ -8,6 +9,7 @@ import Dashboard from "./components/Dashboard";
 import History from "./components/History";
 import { useState } from "react";
 import Account from "./components/Account";
+import { pageLoadVariants, tabSwitchVariants } from "./utils/animations";
 
 const App = () => {
   const { isAuthenticated, isLoading } = useAuth();
@@ -30,22 +32,58 @@ const App = () => {
     >
       <div className="absolute inset-0 bg-white/25 z-0"></div>
 
-      <div className="relative z-10 h-full w-full flex flex-col p-[2rem] gap-[1rem]">
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={pageLoadVariants}
+        className="relative z-10 h-full w-full flex flex-col p-[2rem] gap-[1rem]"
+      >
         <TopBar />
-        <div className={`flex-1 grid gap-[1rem] min-h-0 ${currentScreen === "Dashboard" ? "grid-cols-[minmax(250px,320px)_1fr_minmax(300px,400px)]" : "grid-cols-[minmax(250px,320px)_1fr]"}`}>
-          <SideBar
-            currentScreen={currentScreen}
-            onScreenChange={setCurrentScreen}
-          />
-          {currentScreen === "Dashboard" ? (
-            <Dashboard onNavigateToHistory={() => setCurrentScreen("History")} />
-          ) : currentScreen === "History" ? (
-            <History />
-          ) : (
-            <Account />
-          )}
+        <div className="flex-1 flex gap-[1rem] min-h-0">
+          <div className="w-[minmax(250px,320px)] flex-shrink-0" style={{ width: 'clamp(250px, 20vw, 320px)' }}>
+            <SideBar
+              currentScreen={currentScreen}
+              onScreenChange={setCurrentScreen}
+            />
+          </div>
+          <AnimatePresence mode="wait" initial={false}>
+            {currentScreen === "Dashboard" ? (
+              <motion.div
+                key="dashboard"
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={tabSwitchVariants}
+                className="flex-1 grid grid-cols-[1fr_minmax(300px,400px)] gap-[1rem] min-h-0"
+              >
+                <Dashboard onNavigateToHistory={() => setCurrentScreen("History")} />
+              </motion.div>
+            ) : currentScreen === "History" ? (
+              <motion.div
+                key="history"
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={tabSwitchVariants}
+                className="flex-1"
+              >
+                <History />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="account"
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={tabSwitchVariants}
+                className="flex-1"
+              >
+                <Account />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

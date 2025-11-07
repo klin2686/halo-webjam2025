@@ -137,7 +137,7 @@ const AddAllergyPopup = ({
         <button
           onClick={handleSubmit}
           disabled={!selectedAllergen || isSubmitting}
-          className="cursor-pointer w-full py-3 bg-sky-500/70 hover:bg-sky-500/90 disabled:bg-gray-400/50 disabled:cursor-not-allowed rounded-xl font-sf-pro font-bold text-white text-lg transition-all shadow-lg hover:scale-[1.02] active:scale-[0.98]"
+          className="cursor-pointer w-full py-3 bg-sky-500/70 hover:bg-sky-500/90 disabled:bg-gray-400/50 disabled:cursor-not-allowed rounded-xl font-sf-pro font-bold text-white text-lg transition-all shadow-lg hover:scale-103 active:scale-97"
         >
           {isSubmitting ? "Adding..." : "Add Allergy"}
         </button>

@@ -10,6 +10,16 @@ export default {
         'sf-pro': ['SF_Pro', 'SF Pro Rounded', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'],
         'SF_Pro': ['SF_Pro', 'SF Pro Rounded', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'],
       },
+      scale: {
+        '95': '0.95',
+        '97': '0.97',
+        '98': '0.98',
+        '99': '0.99',
+        '101': '1.01',
+        '102': '1.02',
+        '103': '1.03',
+        '105': '1.05',
+      },
       animation: {
         'fadeIn': 'fadeIn 0.3s ease-in-out',
       },
