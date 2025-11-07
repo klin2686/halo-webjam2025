@@ -47,7 +47,7 @@ const App = () => {
 
   return (
     <div
-      className="h-screen w-screen flex flex-col bg-cover bg-center bg-no-repeat bg-fixed relative"
+      className="h-full w-full flex flex-col bg-cover bg-center bg-no-repeat bg-fixed relative"
       style={{
         backgroundImage: `url(${backgroundImage})`,
       }}
