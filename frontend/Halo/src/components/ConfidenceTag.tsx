@@ -18,11 +18,11 @@ const ConfidenceTag = ({ confidence, text }: ConfidenceTagProps) => {
 
   const getDotColor = (confidence: number) => {
     if (confidence > 7.5) {
-      return "bg-red-500";
+      return "bg-red-50";
     } else if (confidence > 2.5) {
-      return "bg-orange-400";
+      return "bg-orange-50";
     } else {
-      return "bg-green-400";
+      return "bg-green-50";
     }
   };
 
@@ -30,10 +30,17 @@ const ConfidenceTag = ({ confidence, text }: ConfidenceTagProps) => {
     <div
       className={`h-[1.125rem] w-[5rem] rounded-full ${getConfidenceColor(
         confidence
-      )} flex items-center justify-center gap-[0.25rem]`}
+      )} flex items-center justify-center`}
     >
-      <div className={`w-2 h-2 rounded-full ${getDotColor(confidence)}`} />
-      <span className="text-sm text-black font-light font-sf-pro">{text}</span>
+      <div
+        className={`h-[0.875rem] w-[4.750rem] rounded-full ${getDotColor(
+          confidence
+        )} flex items-center justify-center`}
+      >
+        <span className="text-sm text-black font-light font-sf-pro">
+          {text}
+        </span>
+      </div>
     </div>
   );
 };
