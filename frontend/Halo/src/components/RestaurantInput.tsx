@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import { menuAPI, storage, type MenuItem } from "../utils/api";
 import LoadingSpinner from "./LoadingSpinner";
 import ManualInputPopup from "./ManualInputPopup";
+import MiniHistory from "./MiniHistory";
 
 interface RestaurantInputProps {
   onMenuProcessed: (items: MenuItem[]) => void;
+  onSeeAllClick?: () => void;
 }
 
-const RestaurantInput = ({ onMenuProcessed }: RestaurantInputProps) => {
+const RestaurantInput = ({ onMenuProcessed, onSeeAllClick }: RestaurantInputProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showManualInput, setShowManualInput] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -28,6 +31,7 @@ const RestaurantInput = ({ onMenuProcessed }: RestaurantInputProps) => {
       const data = await menuAPI.processMenuImage(accessToken, file);
       console.log('Success:', data);
       onMenuProcessed(data);
+      setRefreshKey(prev => prev + 1);
     } catch (error) {
       console.error('Upload failed:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
@@ -37,20 +41,35 @@ const RestaurantInput = ({ onMenuProcessed }: RestaurantInputProps) => {
     }
   }
 
+  const handleHistoryItemClick = (items: MenuItem[]) => {
+    onMenuProcessed(items);
+  };
+
+  const handleManualInputProcessed = (items: MenuItem[]) => {
+    onMenuProcessed(items);
+    setRefreshKey(prev => prev + 1);
+  };
+
   return (
     <>
       {isLoading && <LoadingSpinner />}
       {showManualInput && (
         <ManualInputPopup
           onClose={() => setShowManualInput(false)}
-          onMenuProcessed={onMenuProcessed}
+          onMenuProcessed={handleManualInputProcessed}
           onSubmitStart={() => setIsLoading(true)}
           onSubmitEnd={() => setIsLoading(false)}
         />
       )}
       <div className="h-full w-full bg-white/50 rounded-3xl shadow-xl backdrop-blur-sm border border-white/50 flex flex-col items-center justify-center gap-[1rem] p-[1rem]">
         <div className="grid grid-cols-[2fr_1fr] gap-[1rem] items-start w-full h-full">
-          <div className="h-full w-full rounded-xl shadow-xl backdrop-blur-sm outline outline-1 outline-offset-[-0.0625rem] outline-white/50 p-[1.5rem]"></div>
+          <div className="h-full w-full rounded-xl shadow-xl backdrop-blur-sm outline outline-1 outline-offset-[-0.0625rem] outline-white/50 p-[1.5rem]">
+            <MiniHistory
+              key={refreshKey}
+              onHistoryItemClick={handleHistoryItemClick}
+              onSeeAllClick={onSeeAllClick}
+            />
+          </div>
           <div className="grid grid-rows-2 gap-[1rem] items-start w-full h-full">
             <input
               type="file"

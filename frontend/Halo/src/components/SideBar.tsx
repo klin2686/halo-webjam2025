@@ -11,12 +11,13 @@ import sidebarSignOut from "../assets/sidebarSignOut.svg";
 import defaultUser from "../assets/defaultUser.svg";
 
 interface SideBarProps {
+  currentScreen?: string;
   onScreenChange?: (screen: string) => void;
 }
 
-const SideBar = ({ onScreenChange }: SideBarProps) => {
+const SideBar = ({ currentScreen, onScreenChange }: SideBarProps) => {
   const { user, logout } = useAuth();
-  const [activeElement, setActiveElement] = useState<string>("Dashboard");
+  const [activeElement, setActiveElement] = useState<string>(currentScreen || "Dashboard");
   const [indicatorStyle, setIndicatorStyle] = useState({ top: 0, height: 0 });
   const [isInitialized, setIsInitialized] = useState(false);
   const [isLifted, setIsLifted] = useState(false);
@@ -31,6 +32,12 @@ const SideBar = ({ onScreenChange }: SideBarProps) => {
     setIsDarkMode(!isDarkMode);
     console.log(isDarkMode ? "light mode" : "dark mode");
   };
+
+  useEffect(() => {
+    if (currentScreen && currentScreen !== activeElement) {
+      setActiveElement(currentScreen);
+    }
+  }, [currentScreen]);
 
   useEffect(() => {
     const activeRef = elementsRef.current[activeElement];

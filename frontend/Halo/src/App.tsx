@@ -11,7 +11,7 @@ import Account from "./components/Account";
 
 const App = () => {
   const { isAuthenticated, isLoading } = useAuth();
-  const [currentScreen, setCurrentScreen] = useState<String>("Dashboard");
+  const [currentScreen, setCurrentScreen] = useState<string>("Dashboard");
 
   if (isLoading) {
     return <Loading />;
@@ -33,9 +33,12 @@ const App = () => {
       <div className="relative z-10 h-full w-full flex flex-col p-[2rem] gap-[1rem]">
         <TopBar />
         <div className={`flex-1 grid gap-[1rem] min-h-0 ${currentScreen === "Dashboard" ? "grid-cols-[minmax(250px,320px)_1fr_minmax(300px,400px)]" : "grid-cols-[minmax(250px,320px)_1fr]"}`}>
-          <SideBar onScreenChange={setCurrentScreen} />
+          <SideBar
+            currentScreen={currentScreen}
+            onScreenChange={setCurrentScreen}
+          />
           {currentScreen === "Dashboard" ? (
-            <Dashboard />
+            <Dashboard onNavigateToHistory={() => setCurrentScreen("History")} />
           ) : currentScreen === "History" ? (
             <History />
           ) : (
