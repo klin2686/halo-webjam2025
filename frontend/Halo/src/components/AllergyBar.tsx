@@ -15,6 +15,7 @@ const AllergyBar = ({ onAllergiesLoaded }: AllergyBarProps) => {
   const [allergies, setAllergies] = useState<Allergy[]>(defaultAllergyList);
   const [loading, setLoading] = useState(true);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   const loadAllergies = async () => {
     const accessToken = storage.getAccessToken();
@@ -36,8 +37,12 @@ const AllergyBar = ({ onAllergiesLoaded }: AllergyBarProps) => {
 
   return (
     <div className="h-full w-full relative bg-white/50 rounded-3xl shadow-xl backdrop-blur-sm outline outline-1 outline-offset-[-0.0625rem] outline-white/50 overflow-y-auto overflow-x-hidden no-scrollbar">
-      <div className="flex flex-col justify-start items-center p-[1rem]">
-        <div className="pt-[2.5rem] flex justify-center text-black font-sf-pro font-semibold text-3xl">
+      <div
+        className={`flex flex-col justify-start ${
+          isActive ? "items-start" : "items-center"
+        } p-[1rem]`}
+      >
+        <div className="pt-[2.5rem] flex justify-center text-black font-sf-pro font-semibold text-3xl w-full">
           My Allergies
         </div>
         <br></br>
@@ -56,13 +61,14 @@ const AllergyBar = ({ onAllergiesLoaded }: AllergyBarProps) => {
               id={allergy.id}
               allergen={allergy.allergen}
               severity={allergy.severity}
+              editActive={isActive}
             />
           ))
         )}
 
-        <div className="flex gap-[1rem] mt-[1rem] mb-[1rem]">
+        <div className="flex gap-[1rem] mt-[1rem] mb-[1rem] w-full justify-center">
           <button
-            onClick={loadAllergies}
+            onClick={() => setIsActive(!isActive)}
             className="w-[3rem] h-[3rem] backdrop-blur-sm border border-white/50 rounded-full flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all"
           >
             <svg
@@ -74,12 +80,22 @@ const AllergyBar = ({ onAllergiesLoaded }: AllergyBarProps) => {
               xmlns="http://www.w3.org/2000/svg"
               className="ml-[0.05rem] -mt-[0.1rem]"
             >
-              <path // Pencil Button
-                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
-                stroke="#56BECC"
-                strokeWidth="3"
-                strokeLinecap="round"
-              />
+              {isActive ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m4.5 12.75 6 6 9-13.5"
+                  stroke="#56BECC"
+                  strokeWidth="3"
+                />
+              ) : (
+                <path
+                  d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                  stroke="#56BECC"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                />
+              )}
             </svg>
           </button>
 
