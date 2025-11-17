@@ -1,10 +1,16 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, jsonify, request
 from sqlalchemy import select
-from app.utils.validators import validate_email_address, validate_password_strength
+
 from app.extensions import db
 from app.models import User
-from app.utils.jwt_utils import generate_access_token, generate_refresh_token, decode_token, token_required
 from app.utils.google_oauth import verify_google_token
+from app.utils.jwt_utils import (
+    decode_token,
+    generate_access_token,
+    generate_refresh_token,
+    token_required,
+)
+from app.utils.validators import validate_email_address, validate_password_strength
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -36,9 +42,7 @@ def register():
         return jsonify({'error': 'Email already registered'}), 409
 
     user = User(
-        email=normalized_email,
-        name=name if name else None,
-        email_verified=False
+        email=normalized_email, name=name if name else None, email_verified=False
     )
     user.set_password(password)
 
@@ -48,12 +52,14 @@ def register():
     access_token = generate_access_token(user.id)
     refresh_token = generate_refresh_token(user.id)
 
-    return jsonify({
-        'message': 'User registered successfully',
-        'user': user.to_dict(),
-        'access_token': access_token,
-        'refresh_token': refresh_token
-    }), 201
+    return jsonify(
+        {
+            'message': 'User registered successfully',
+            'user': user.to_dict(),
+            'access_token': access_token,
+            'refresh_token': refresh_token,
+        }
+    ), 201
 
 
 @auth_bp.route('/auth/login', methods=['POST'])
@@ -80,12 +86,14 @@ def login():
     access_token = generate_access_token(user.id)
     refresh_token = generate_refresh_token(user.id)
 
-    return jsonify({
-        'message': 'Login successful',
-        'user': user.to_dict(),
-        'access_token': access_token,
-        'refresh_token': refresh_token
-    }), 200
+    return jsonify(
+        {
+            'message': 'Login successful',
+            'user': user.to_dict(),
+            'access_token': access_token,
+            'refresh_token': refresh_token,
+        }
+    ), 200
 
 
 @auth_bp.route('/auth/google', methods=['POST'])
@@ -113,12 +121,14 @@ def google_auth():
         access_token = generate_access_token(user.id)
         refresh_token = generate_refresh_token(user.id)
 
-        return jsonify({
-            'message': 'Login successful',
-            'user': user.to_dict(),
-            'access_token': access_token,
-            'refresh_token': refresh_token
-        }), 200
+        return jsonify(
+            {
+                'message': 'Login successful',
+                'user': user.to_dict(),
+                'access_token': access_token,
+                'refresh_token': refresh_token,
+            }
+        ), 200
 
     email = google_user_info['email'].lower()
     stmt = select(User).where(User.email == email)
@@ -136,12 +146,14 @@ def google_auth():
         access_token = generate_access_token(user.id)
         refresh_token = generate_refresh_token(user.id)
 
-        return jsonify({
-            'message': 'Google account linked successfully',
-            'user': user.to_dict(),
-            'access_token': access_token,
-            'refresh_token': refresh_token
-        }), 200
+        return jsonify(
+            {
+                'message': 'Google account linked successfully',
+                'user': user.to_dict(),
+                'access_token': access_token,
+                'refresh_token': refresh_token,
+            }
+        ), 200
 
     # new user
     user = User(
@@ -149,7 +161,7 @@ def google_auth():
         google_id=google_user_info['google_id'],
         name=google_user_info.get('name'),
         profile_picture=google_user_info.get('picture'),
-        email_verified=True
+        email_verified=True,
     )
 
     db.session.add(user)
@@ -158,12 +170,14 @@ def google_auth():
     access_token = generate_access_token(user.id)
     refresh_token = generate_refresh_token(user.id)
 
-    return jsonify({
-        'message': 'User registered successfully',
-        'user': user.to_dict(),
-        'access_token': access_token,
-        'refresh_token': refresh_token
-    }), 201
+    return jsonify(
+        {
+            'message': 'User registered successfully',
+            'user': user.to_dict(),
+            'access_token': access_token,
+            'refresh_token': refresh_token,
+        }
+    ), 201
 
 
 @auth_bp.route('/auth/refresh', methods=['POST'])
@@ -185,18 +199,14 @@ def refresh():
 
     access_token = generate_access_token(user.id)
 
-    return jsonify({
-        'access_token': access_token
-    }), 200
+    return jsonify({'access_token': access_token}), 200
 
 
 @auth_bp.route('/auth/me', methods=['GET'])
 @token_required
 def get_current_user(current_user):
     """Get current user info from token"""
-    return jsonify({
-        'user': current_user.to_dict()
-    }), 200
+    return jsonify({'user': current_user.to_dict()}), 200
 
 
 @auth_bp.route('/auth/update-profile', methods=['PUT'])
@@ -212,14 +222,15 @@ def update_profile(current_user):
         current_user.name = data['name'].strip() if data['name'] else None
 
     if 'profile_picture' in data:
-        current_user.profile_picture = data['profile_picture'].strip() if data['profile_picture'] else None
+        current_user.profile_picture = (
+            data['profile_picture'].strip() if data['profile_picture'] else None
+        )
 
     db.session.commit()
 
-    return jsonify({
-        'message': 'Profile updated successfully',
-        'user': current_user.to_dict()
-    }), 200
+    return jsonify(
+        {'message': 'Profile updated successfully', 'user': current_user.to_dict()}
+    ), 200
 
 
 @auth_bp.route('/auth/change-password', methods=['POST'])
@@ -244,6 +255,4 @@ def change_password(current_user):
     current_user.set_password(data['new_password'])
     db.session.commit()
 
-    return jsonify({
-        'message': 'Password changed successfully'
-    }), 200
+    return jsonify({'message': 'Password changed successfully'}), 200

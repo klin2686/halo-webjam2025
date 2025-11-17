@@ -1,13 +1,15 @@
+import io
+import json
+
+import pillow_heif
 from flask import Blueprint, jsonify, request
 from google import genai
 from google.genai import types
-from PIL import Image, ImageOps, ImageEnhance
-import pillow_heif
-import io
-import json
+from PIL import Image, ImageEnhance, ImageOps
 from sqlalchemy import select
-from app.models import STANDARD_ALLERGENS, MenuUpload
+
 from app.extensions import db
+from app.models import STANDARD_ALLERGENS, MenuUpload
 from app.utils.jwt_utils import token_required
 
 pillow_heif.register_heif_opener()
@@ -91,10 +93,7 @@ menu_item_schema = types.Schema(
     },
     required=['item_name', 'common_allergens', 'confidence_score']
 )
-response_schema = types.Schema(
-    type=types.Type.ARRAY,
-    items=menu_item_schema
-)
+response_schema = types.Schema(type=types.Type.ARRAY, items=menu_item_schema)
 
 
 @llm_bp.route('/process-menu', methods=['POST'])
@@ -132,20 +131,24 @@ def process_menu(current_user):
             gemini_image_prompt,
             types.Part.from_bytes(
                 data=image_bytes,
-                mime_type='image/jpeg',
+                mime_type='image/jpeg'
             )
         ],
         config={
             'response_mime_type': 'application/json',
             'response_schema': response_schema,
             'temperature': 0
-        },
+        }
     )
 
     if response.text:
         parsed_data = json.loads(response.text)
 
-        if parsed_data and len(parsed_data) > 0 and parsed_data[0].get('item_name') == '__ERROR__':
+        if (
+            parsed_data
+            and len(parsed_data) > 0
+            and parsed_data[0].get('item_name') == '__ERROR__'
+        ):
             return jsonify({'error': 'Menu image is too blurry or unreadable'}), 400
 
         try:
@@ -199,7 +202,11 @@ def process_manual(current_user):
 
     if response.text:
         parsed_data = json.loads(response.text)
-        if parsed_data and len(parsed_data) > 0 and parsed_data[0].get('item_name') == '__ERROR__':
+        if (
+            parsed_data
+            and len(parsed_data) > 0
+            and parsed_data[0].get('item_name') == '__ERROR__'
+        ):
             return jsonify({'error': 'Invalid menu items'}), 400
 
         try:
@@ -226,7 +233,11 @@ def get_menu_uploads(current_user):
     limit = request.args.get('limit', type=int)
 
     try:
-        stmt = select(MenuUpload).filter_by(user_id=current_user.id).order_by(MenuUpload.created_at.desc())
+        stmt = (
+            select(MenuUpload)
+            .filter_by(user_id=current_user.id)
+            .order_by(MenuUpload.created_at.desc())
+        )
 
         if limit is not None and limit > 0:
             stmt = stmt.limit(limit)

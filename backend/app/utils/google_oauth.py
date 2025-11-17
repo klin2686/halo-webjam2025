@@ -1,4 +1,5 @@
-from typing import Optional, Dict, Any
+from typing import Any, Dict, Optional
+
 import requests
 from flask import current_app
 
@@ -10,7 +11,7 @@ def verify_google_token(token: str) -> Optional[Dict[str, Any]]:
         response = requests.get(
             'https://www.googleapis.com/oauth2/v3/userinfo',
             headers={'Authorization': f'Bearer {token}'},
-            timeout=10
+            timeout=10,
         )
 
         if response.status_code != 200:
@@ -26,11 +27,11 @@ def verify_google_token(token: str) -> Optional[Dict[str, Any]]:
             'google_id': user_info['sub'],
             'email': user_info['email'],
             'name': user_info.get('name'),
-            'picture': user_info.get('picture')
+            'picture': user_info.get('picture'),
         }
 
     except Exception as e:
-        current_app.logger.error(f"Google token verification failed: {str(e)}")
+        current_app.logger.error(f'Google token verification failed: {str(e)}')
         return None
 
 
@@ -46,7 +47,7 @@ def get_google_oauth_url() -> str:
         'response_type': 'code',
         'scope': 'openid email profile',
         'access_type': 'offline',
-        'prompt': 'consent'
+        'prompt': 'consent',
     }
 
     query_string = '&'.join([f'{k}={v}' for k, v in params.items()])

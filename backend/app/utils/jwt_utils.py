@@ -1,10 +1,11 @@
 from datetime import datetime, timedelta, timezone
-from typing import Optional, Dict, Any
-import jwt
-from flask import current_app, request
 from functools import wraps
-from app.models import User
+from typing import Any, Dict, Optional
+
+import jwt
 from app.extensions import db
+from app.models import User
+from flask import current_app, request
 
 
 def generate_access_token(user_id: int) -> str:
@@ -13,7 +14,7 @@ def generate_access_token(user_id: int) -> str:
         'user_id': user_id,
         'exp': datetime.now(timezone.utc) + timedelta(hours=48),
         'iat': datetime.now(timezone.utc),
-        'type': 'access'
+        'type': 'access',
     }
     return jwt.encode(payload, current_app.config['SECRET_KEY'], algorithm='HS256')
 
@@ -24,7 +25,7 @@ def generate_refresh_token(user_id: int) -> str:
         'user_id': user_id,
         'exp': datetime.now(timezone.utc) + timedelta(days=30),
         'iat': datetime.now(timezone.utc),
-        'type': 'refresh'
+        'type': 'refresh',
     }
     return jwt.encode(payload, current_app.config['SECRET_KEY'], algorithm='HS256')
 
@@ -32,7 +33,9 @@ def generate_refresh_token(user_id: int) -> str:
 def decode_token(token: str) -> Optional[Dict[str, Any]]:
     """Decode and verify JWT token"""
     try:
-        payload = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])
+        payload = jwt.decode(
+            token, current_app.config['SECRET_KEY'], algorithms=['HS256']
+        )
         return payload
     except jwt.ExpiredSignatureError:
         return None
@@ -50,6 +53,7 @@ def get_token_from_header() -> Optional[str]:
 
 def token_required(f):
     """Decorator to protect routes with JWT authentication"""
+
     @wraps(f)
     def decorated(*args, **kwargs):
         token = get_token_from_header()
@@ -75,6 +79,7 @@ def token_required(f):
 
 def token_optional(f):
     """Decorator to optionally get user from token if present"""
+
     @wraps(f)
     def decorated(*args, **kwargs):
         token = get_token_from_header()

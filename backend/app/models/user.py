@@ -1,43 +1,54 @@
 from datetime import datetime, timezone
-from typing import Optional
-from sqlalchemy import String, Boolean, DateTime, Integer
+from typing import TYPE_CHECKING, Optional
+
+from sqlalchemy import Boolean, DateTime, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
+
 from app.extensions import db
-from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from app.models import UserAllergy, MenuUpload
+    from app.models import MenuUpload, UserAllergy
 
 
 class User(db.Model):
     __tablename__ = 'users'
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False, index=True)
+    email: Mapped[str] = mapped_column(
+        String(255), unique=True, nullable=False, index=True
+    )
     password_hash: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
-    google_id: Mapped[Optional[str]] = mapped_column(String(255), unique=True, nullable=True, index=True)
+    google_id: Mapped[Optional[str]] = mapped_column(
+        String(255), unique=True, nullable=True, index=True
+    )
     name: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
     email_verified: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     profile_picture: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
-    allergens: Mapped[list['UserAllergy']] = relationship('UserAllergy', back_populates='user', cascade='all, delete-orphan')
-    uploads: Mapped[list['MenuUpload']] = relationship('MenuUpload', back_populates='user', cascade='all, delete-orphan')
+    allergens: Mapped[list['UserAllergy']] = relationship(
+        'UserAllergy', back_populates='user', cascade='all, delete-orphan'
+    )
+    uploads: Mapped[list['MenuUpload']] = relationship(
+        'MenuUpload', back_populates='user', cascade='all, delete-orphan'
+    )
 
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime, default=lambda: datetime.now(timezone.utc), nullable=False
+    )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime, 
-        default=lambda: datetime.now(timezone.utc), 
+        DateTime,
+        default=lambda: datetime.now(timezone.utc),
         onupdate=lambda: datetime.now(timezone.utc),
-        nullable=False
+        nullable=False,
     )
 
     def __init__(
-        self, 
+        self,
         email: str,
         google_id: Optional[str] = None,
         name: Optional[str] = None,
         email_verified: bool = False,
-        profile_picture: Optional[str] = None
+        profile_picture: Optional[str] = None,
     ):
         self.email = email
         self.google_id = google_id
@@ -64,7 +75,7 @@ class User(db.Model):
             'profile_picture': self.profile_picture,
             'created_at': self.created_at.isoformat(),
             'has_password': self.password_hash is not None,
-            'has_google_auth': self.google_id is not None
+            'has_google_auth': self.google_id is not None,
         }
 
     def __repr__(self) -> str:

@@ -1,5 +1,6 @@
 from typing import Tuple
-from email_validator import validate_email, EmailNotValidError
+
+from email_validator import EmailNotValidError, validate_email
 
 
 def validate_email_address(email: str) -> Tuple[bool, str, str | None]:
@@ -15,9 +16,9 @@ def validate_email_address(email: str) -> Tuple[bool, str, str | None]:
 def validate_password_strength(password: str) -> Tuple[bool, str | None]:
     """Validate password meets strength requirements"""
     if len(password) < 8:
-        return False, "Password must be at least 8 characters long"
+        return False, 'Password must be at least 8 characters long'
 
     if len(password) > 128:
-        return False, "Password must be less than 128 characters"
+        return False, 'Password must be less than 128 characters'
 
     return True, None

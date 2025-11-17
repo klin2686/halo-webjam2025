@@ -1,22 +1,29 @@
 from flask import Blueprint, jsonify, request
 from sqlalchemy import select
-from app.extensions import db
-from app.utils.jwt_utils import token_required
-from app.models import UserAllergy, Allergen, STANDARD_ALLERGENS
 
-allergy_bp = Blueprint('allergy',__name__)
+from app.extensions import db
+from app.models import STANDARD_ALLERGENS, Allergen, UserAllergy
+from app.utils.jwt_utils import token_required
+
+allergy_bp = Blueprint('allergy', __name__)
 
 
 @allergy_bp.route('/allergy/get', methods=['GET'])
 @token_required
 def get_allergy(current_user):
     """Retrieve all allergies for the current user"""
-    stmt = select(UserAllergy).where(UserAllergy.user_id == current_user.id).order_by(UserAllergy.severity.desc())
+    stmt = (
+        select(UserAllergy)
+        .where(UserAllergy.user_id == current_user.id)
+        .order_by(UserAllergy.severity.desc())
+    )
     user_allergies = db.session.scalars(stmt).all()
-    return jsonify({
-        'message': 'Allergies retrieved successfully',
-        'user_allergy': [user_allergy.to_dict() for user_allergy in user_allergies]
-    }), 200
+    return jsonify(
+        {
+            'message': 'Allergies retrieved successfully',
+            'user_allergy': [user_allergy.to_dict() for user_allergy in user_allergies],
+        }
+    ), 200
 
 
 @allergy_bp.route('/allergy/add', methods=['POST'])
@@ -51,18 +58,26 @@ def add_allergy(current_user):
     if not allergen:
         return jsonify({'error': 'Allergen not found'}), 404
 
-    stmt = select(UserAllergy).where(UserAllergy.user_id == current_user.id).where(UserAllergy.allergen_id == allergen.id)
+    stmt = (
+        select(UserAllergy)
+        .where(UserAllergy.user_id == current_user.id)
+        .where(UserAllergy.allergen_id == allergen.id)
+    )
     user_allergy = db.session.execute(stmt).scalar_one_or_none()
     if user_allergy:
         return jsonify({'error': 'User allergy already exists'}), 400
 
-    new_user_allergy = UserAllergy(user_id=current_user.id, allergen_id=allergen.id, severity=food_severity)
+    new_user_allergy = UserAllergy(
+        user_id=current_user.id, allergen_id=allergen.id, severity=food_severity
+    )
     db.session.add(new_user_allergy)
     db.session.commit()
-    return jsonify({
-        'message': 'Allergy created successfully',
-        'user_allergy': new_user_allergy.to_dict()
-    }), 201
+    return jsonify(
+        {
+            'message': 'Allergy created successfully',
+            'user_allergy': new_user_allergy.to_dict(),
+        }
+    ), 201
 
 
 @allergy_bp.route('/allergy/update', methods=['PUT'])
@@ -89,7 +104,9 @@ def update_allergy(current_user):
     except ValueError:
         return jsonify({'error': 'Severity must be an int'}), 400
     if not 1 <= severity <= 3:
-        return jsonify({'error': 'Severity must be between 1 and 3; 1 for mild and 3 for severe'}), 400
+        return jsonify(
+            {'error': 'Severity must be between 1 and 3; 1 for mild and 3 for severe'}
+        ), 400
 
     user_allergy = db.session.get(UserAllergy, user_allergy_id)
 
@@ -97,14 +114,18 @@ def update_allergy(current_user):
         return jsonify({'error': 'User allergy not found'}), 400
 
     if user_allergy.user_id != current_user.id:
-        return jsonify({'error': 'Current user does not own the given user allergy'}), 401
+        return jsonify(
+            {'error': 'Current user does not own the given user allergy'}
+        ), 401
 
     user_allergy.severity = severity
     db.session.commit()
-    return jsonify({
-        'message': 'User allergy severity updated successfully',
-        'user_allergy': user_allergy.to_dict()
-    }), 200
+    return jsonify(
+        {
+            'message': 'User allergy severity updated successfully',
+            'user_allergy': user_allergy.to_dict(),
+        }
+    ), 200
 
 
 @allergy_bp.route('/allergy/delete', methods=['DELETE'])
@@ -129,7 +150,9 @@ def delete_allergy(current_user):
         return jsonify({'error': 'User_allergy association not found'}), 404
 
     if user_allergy.user_id != current_user.id:
-        return jsonify({'error': 'Current user does not own the given user_allergy'}), 401
+        return jsonify(
+            {'error': 'Current user does not own the given user_allergy'}
+        ), 401
 
     db.session.delete(user_allergy)
     db.session.commit()

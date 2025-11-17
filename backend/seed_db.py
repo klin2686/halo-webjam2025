@@ -1,8 +1,7 @@
 from app import create_app
 from app.extensions import db
-from app.models import Allergen, STANDARD_ALLERGENS
+from app.models import STANDARD_ALLERGENS, Allergen
 from sqlalchemy import select
-
 
 app = create_app()
 with app.app_context():
@@ -12,4 +11,6 @@ with app.app_context():
         if not exists:
             db.session.add(Allergen(name=allergen_name))
     db.session.commit()
-    print(f"Standard allergens seeded! {len(STANDARD_ALLERGENS)} allergens added to database.")
+    print(
+        f'Standard allergens seeded! {len(STANDARD_ALLERGENS)} allergens added to database.'
+    )

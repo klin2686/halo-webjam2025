@@ -1,7 +1,9 @@
 import os
+
 from flask import Flask
-from app.extensions import db, cors
+
 from app.config import config
+from app.extensions import cors, db
 
 
 def create_app(config_name=None):
@@ -15,19 +17,20 @@ def create_app(config_name=None):
 
     db.init_app(app)
 
-    # Configure CORS
     cors_origins = app.config['CORS_ORIGINS']
     if cors_origins == '*':
         cors.init_app(app)
     else:
-        cors.init_app(app,
-            resources={r"/api/*": {"origins": cors_origins}},
+        cors.init_app(
+            app,
+            resources={r'/api/*': {'origins': cors_origins}},
             supports_credentials=True,
-            allow_headers=["Content-Type", "Authorization"],
-            methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+            allow_headers=['Content-Type', 'Authorization'],
+            methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         )
 
     from app.routes import register_blueprints
+
     register_blueprints(app)
 
     with app.app_context():

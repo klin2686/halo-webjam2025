@@ -1,7 +1,7 @@
+from app.routes.allergy_routes import allergy_bp
+from app.routes.auth_routes import auth_bp
 from app.routes.health_routes import health_bp
 from app.routes.llm_routes import llm_bp
-from app.routes.auth_routes import auth_bp
-from app.routes.allergy_routes import allergy_bp
 
 
 def register_blueprints(app):

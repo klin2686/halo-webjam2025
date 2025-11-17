@@ -1,10 +1,12 @@
-from sqlalchemy import ForeignKey, Integer, UniqueConstraint, CheckConstraint
-from sqlalchemy.orm import Mapped, mapped_column, relationship
-from app.extensions import db
 from typing import TYPE_CHECKING
 
+from sqlalchemy import CheckConstraint, ForeignKey, Integer, UniqueConstraint
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from app.extensions import db
+
 if TYPE_CHECKING:
-    from app.models import User, Allergen
+    from app.models import Allergen, User
 
 
 class UserAllergy(db.Model):
@@ -12,9 +14,15 @@ class UserAllergy(db.Model):
     __table_args__ = (UniqueConstraint('user_id', 'allergen_id'),)
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    severity: Mapped[int] = mapped_column(Integer, CheckConstraint('severity >= 1 AND severity <= 3'), nullable=False)
-    user_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'), index=True, nullable=False)
-    allergen_id: Mapped[int] = mapped_column(Integer, ForeignKey('allergens.id'), index=True, nullable=False)
+    severity: Mapped[int] = mapped_column(
+        Integer, CheckConstraint('severity >= 1 AND severity <= 3'), nullable=False
+    )
+    user_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey('users.id'), index=True, nullable=False
+    )
+    allergen_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey('allergens.id'), index=True, nullable=False
+    )
     user: Mapped['User'] = relationship('User', back_populates='allergens')
     allergen: Mapped['Allergen'] = relationship('Allergen', back_populates='users')
 
@@ -29,7 +37,7 @@ class UserAllergy(db.Model):
             'user_id': self.user_id,
             'allergen_id': self.allergen_id,
             'severity': self.severity,
-            'allergen_name': self.allergen.name
+            'allergen_name': self.allergen.name,
         }
 
     def __repr__(self) -> str:
