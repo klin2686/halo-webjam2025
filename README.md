@@ -4,9 +4,9 @@
 
 > Built for ICSSC's WebJam 2025
 
-![Halo Sign In](./assets/img/halo_sign_in.png)
+<img width="1919" height="1199" alt="Halo Sign In" src="https://github.com/user-attachments/assets/7193a1d3-b29a-4dfa-8a7b-ec610c5720cf" />
 
-![Halo Dashboard](./assets/img/halo_dashboard.png)
+<img width="1919" height="1199" alt="Halo Dashboard" src="https://github.com/user-attachments/assets/a408ae76-db67-4a91-a9c3-cfd473f9cb85" />
 
 Halo is an AI-powered food allergy management application that helps users safely navigate restaurant menus. Upload a menu photo or enter items manually, and Halo uses Google Gemini AI to identify potential allergens in each dish, giving you peace of mind when dining out. Identified allergens are matched against users' personalized allergy lists to provide searching and color coding.
 
