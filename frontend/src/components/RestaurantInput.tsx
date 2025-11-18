@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { menuAPI, storage, type MenuItem } from "../utils/api";
 import LoadingSpinner from "./LoadingSpinner";
@@ -15,18 +15,27 @@ const RestaurantInput = ({ onMenuProcessed, onSeeAllClick }: RestaurantInputProp
   const [isLoading, setIsLoading] = useState(false);
   const [showManualInput, setShowManualInput] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => setError(null), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
+
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       handleUpload(file)
     }
   }
-  
-  const accessToken = storage.getAccessToken();
 
   const handleUpload = async (file: File) => {
     setIsLoading(true);
+    setError(null);
     try {
+      const accessToken = storage.getAccessToken();
       if (!accessToken) {
         throw new Error('Access token is required');
       }
@@ -37,7 +46,7 @@ const RestaurantInput = ({ onMenuProcessed, onSeeAllClick }: RestaurantInputProp
     } catch (error) {
       console.error('Upload failed:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      alert(`Upload failed: ${errorMessage}`);
+      setError(`Upload failed: ${errorMessage}`);
     } finally {
       setIsLoading(false);
     }
@@ -55,6 +64,11 @@ const RestaurantInput = ({ onMenuProcessed, onSeeAllClick }: RestaurantInputProp
   return (
     <>
       {isLoading && <LoadingSpinner />}
+      {error && (
+        <div className="fixed top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-xl z-50 animate-fadeIn">
+          {error}
+        </div>
+      )}
       {showManualInput && (
         <ManualInputPopup
           onClose={() => setShowManualInput(false)}

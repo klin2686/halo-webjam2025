@@ -77,9 +77,9 @@ const History = () => {
             {!isLoading && !error && menuHistory.length === 0 && (
               <div className="text-center py-4 text-gray-500">No menu history</div>
             )}
-            {!isLoading && !error && menuHistory.map((item, index) => (
+            {!isLoading && !error && menuHistory.map((item) => (
               <HistoryCard
-                key={index}
+                key={item.id}
                 id={item.id}
                 name={item.upload_name}
                 dateTime={formatDateTime(item.created_at)}

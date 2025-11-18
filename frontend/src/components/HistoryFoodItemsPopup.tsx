@@ -102,9 +102,9 @@ const HistoryFoodItemsPopup = ({
         </div>
         <div className="grid grid-cols-3 place-items-center pt-[6.125rem] px-6 pb-6 overflow-y-auto overflow-x-visible no-scrollbar">
           {filteredItems.length > 0 ? (
-            filteredItems.map((item, index) => (
+            filteredItems.map((item) => (
               <FoodItemCard
-                key={`${item.food}-${index}`}
+                key={`${item.food}-${item.confidence}`}
                 food={item.food}
                 confidence={item.confidence}
                 allergens={item.allergens}

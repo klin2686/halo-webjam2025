@@ -1,4 +1,4 @@
-import { useAuth } from "./contexts/AuthContext";
+import { useAuth } from "./hooks/useAuth";
 import { motion, AnimatePresence } from "framer-motion";
 import TopBar from "./components/TopBar";
 import SideBar from "./components/SideBar";

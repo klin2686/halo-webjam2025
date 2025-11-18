@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 import SideBarProfile from "./SideBarProfile";
 import SideBarElement from "./SideBarElement";
 import SideBarSwitch from "./SideBarSwitch";
@@ -51,9 +51,11 @@ const SideBar = ({ currentScreen, onScreenChange }: SideBarProps) => {
         height: activeRef.offsetHeight - 16,
       });
 
-      setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         setIsLifted(true);
       }, 500);
+
+      return () => clearTimeout(timeoutId);
     }
   }, [activeElement]);
 
@@ -65,9 +67,11 @@ const SideBar = ({ currentScreen, onScreenChange }: SideBarProps) => {
         height: dashboardRef.offsetHeight - 16,
       });
       setIsInitialized(true);
-      setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         setIsLifted(true);
       }, 100);
+
+      return () => clearTimeout(timeoutId);
     }
   }, []);
 

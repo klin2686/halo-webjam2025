@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 import { useGoogleLogin } from "@react-oauth/google";
 import backgroundImage from "../assets/background.jpg";
 import haloLogo from "../assets/haloLogo.svg";

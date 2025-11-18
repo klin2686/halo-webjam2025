@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { menuAPI, storage, type MenuItem } from "../utils/api";
 
 interface ManualInputPopupProps {
@@ -11,18 +11,27 @@ interface ManualInputPopupProps {
 const ManualInputPopup = ({ onClose, onMenuProcessed, onSubmitStart, onSubmitEnd }: ManualInputPopupProps) => {
   const [menuTitle, setMenuTitle] = useState("");
   const [menuItems, setMenuItems] = useState("");
-  const accessToken = storage.getAccessToken();
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => setError(null), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   const handleSubmit = async () => {
+    setError(null);
     const items = menuItems.trim().split('\n').filter(item => item.trim() !== '');
 
     if (items.length === 0) {
-      alert('Please enter at least one menu item');
+      setError('Please enter at least one menu item');
       return;
     }
 
+    const accessToken = storage.getAccessToken();
     if (!accessToken) {
-      alert('No access token available. Please log in again.');
+      setError('No access token available. Please log in again.');
       return;
     }
 
@@ -35,7 +44,7 @@ const ManualInputPopup = ({ onClose, onMenuProcessed, onSubmitStart, onSubmitEnd
     } catch (error) {
       console.error('Processing failed:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      alert(`Processing failed: ${errorMessage}`);
+      setError(`Processing failed: ${errorMessage}`);
     } finally {
       onSubmitEnd();
     }
@@ -67,6 +76,11 @@ const ManualInputPopup = ({ onClose, onMenuProcessed, onSubmitStart, onSubmitEnd
           <h2 className="text-3xl font-sf-pro font-semibold text-black">
             Manual Input
           </h2>
+          {error && (
+            <div className="w-full bg-red-500 text-white px-4 py-2 rounded-lg shadow-xl text-center animate-fadeIn">
+              {error}
+            </div>
+          )}
           <input
             type="text"
             value={menuTitle}

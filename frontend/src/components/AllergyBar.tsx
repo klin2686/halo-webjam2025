@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 import { storage } from "../utils/api";
 import AllergyCard from "./AllergyCard";
 import AddAllergyPopup from "./AddAllergyPopup";
@@ -19,6 +19,7 @@ const AllergyBar = ({ onAllergiesLoaded }: AllergyBarProps) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [deletingIds, setDeletingIds] = useState<Set<number>>(new Set());
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const loadAllergies = useCallback(async () => {
     const accessToken = storage.getAccessToken();
@@ -38,10 +39,18 @@ const AllergyBar = ({ onAllergiesLoaded }: AllergyBarProps) => {
     loadAllergies();
   }, [loadAllergies]);
 
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
   const handleRemoveAllergy = (allergyId: number) => {
     setDeletingIds((prev) => new Set(prev).add(allergyId));
 
-    setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       setAllergies((prevAllergies) => {
         const updatedAllergies = prevAllergies.filter((allergy) => allergy.id !== allergyId);
         onAllergiesLoaded?.(updatedAllergies);
