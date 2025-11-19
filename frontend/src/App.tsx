@@ -10,22 +10,27 @@ import History from "./components/History";
 import { useState } from "react";
 import Account from "./components/Account";
 import { pageLoadVariants, tabSwitchVariants } from "./utils/animations";
+import HaloAboutPage from "./components/HaloAboutPage";
 
 const App = () => {
   const { isAuthenticated, isLoading } = useAuth();
   const [currentScreen, setCurrentScreen] = useState<string>("Dashboard");
+  const [showAboutPage, setShowAboutPage] = useState<boolean>(true);
 
   if (isLoading) {
     return <Loading />;
   }
 
   if (!isAuthenticated) {
+    if (showAboutPage) {
+      return <HaloAboutPage onSignIn={() => setShowAboutPage(false)} />;
+    }
     return <UserLogin />;
   }
 
   return (
     <div
-      className="h-screen w-screen flex flex-col bg-cover bg-center bg-no-repeat relative"
+      className="h-screen w-screen flex flex-col bg-cover bg-center bg-no-repeat bg-fixed relative"
       style={{
         backgroundImage: `url(${backgroundImage})`,
       }}
@@ -40,7 +45,10 @@ const App = () => {
       >
         <TopBar />
         <div className="flex-1 flex gap-[1rem] min-h-0">
-          <div className="w-[minmax(250px,320px)] flex-shrink-0" style={{ width: 'clamp(250px, 20vw, 320px)' }}>
+          <div
+            className="w-[minmax(250px,320px)] flex-shrink-0"
+            style={{ width: "clamp(250px, 20vw, 320px)" }}
+          >
             <SideBar
               currentScreen={currentScreen}
               onScreenChange={setCurrentScreen}
@@ -56,7 +64,9 @@ const App = () => {
                 variants={tabSwitchVariants}
                 className="flex-1 grid grid-cols-[1fr_minmax(300px,400px)] gap-[1rem] min-h-0"
               >
-                <Dashboard onNavigateToHistory={() => setCurrentScreen("History")} />
+                <Dashboard
+                  onNavigateToHistory={() => setCurrentScreen("History")}
+                />
               </motion.div>
             ) : currentScreen === "History" ? (
               <motion.div
