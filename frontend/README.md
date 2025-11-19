@@ -1,15 +1,6 @@
 # Halo Frontend
 
-React + TypeScript frontend for the Halo allergy management application.
-
-## Tech Stack
-
-- **React 19** - UI framework
-- **TypeScript** - Type safety
-- **Vite** - Build tool and dev server
-- **Tailwind CSS 4** - Styling
-- **Framer Motion** - Animations
-- **Google OAuth** - Authentication
+React + TypeScript frontend for the Halo food allergy management application.
 
 ## Prerequisites
 
@@ -18,27 +9,27 @@ React + TypeScript frontend for the Halo allergy management application.
 
 ## Setup
 
-2. **Navigate to the frontend directory**
+1. **Navigate to the frontend directory**
 
    ```bash
    cd frontend
    ```
 
-3. **Install dependencies**
+2. **Install dependencies**
 
    ```bash
    npm install
    ```
 
-4. **Configure environment variables**
+3. **Configure environment variables**
 
    Copy `.env.example` to `.env`:
    ```bash
    cp .env.example .env
    ```
-   *Note: On windows, use `copy` instead of `cp`*
+   *Note: On Windows, use `copy` instead of `cp`*
 
-   Update the values:
+   Update the values in `.env`:
    - `VITE_API_URL` - Backend API URL (default: `http://localhost:5001/api`)
    - `VITE_GOOGLE_CLIENT_ID` - Your Google OAuth Client ID
 
@@ -87,15 +78,6 @@ src/
 ├── App.tsx          # Main app component
 └── main.tsx         # Entry point
 ```
-
-## Key Features
-
-- 🔐 Google OAuth authentication
-- 🥗 Allergy tracking and management
-- 📋 Menu scanning and analysis
-- 📊 Food item confidence scoring
-- 📱 Responsive design
-- ✨ Smooth animations with Framer Motion
 
 ## Notes
 
