@@ -7,7 +7,7 @@ This is a Flask-based REST API for a food allergy management application. The AP
 ## Base URL
 
 ```
-http://localhost:5000/api
+http://localhost:5001/api
 ```
 
 ## Authentication
