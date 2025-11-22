@@ -70,20 +70,6 @@ const About = ({ onSignIn }: AboutProps) => {
       />
 
       <div className="text-center max-w-4xl relative z-10">
-        {/* Animated badge */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-block mb-6"
-        >
-          <div className="bg-white/50 backdrop-blur-sm rounded-full px-6 py-3 shadow-xl outline outline-1 outline-offset-[-0.0625rem] outline-white/50">
-            <span className="text-black font-sf-pro font-semibold text-sm">
-              🛡️ AI-Powered Allergy Protection
-            </span>
-          </div>
-        </motion.div>
-
         {/* Logo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -98,7 +84,7 @@ const About = ({ onSignIn }: AboutProps) => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-7xl md:text-8xl font-bold text-black mb-4 font-sf-pro"
+          className="text-7xl md:text-8xl font-bold text-black mb-5 font-sf-pro"
         >
           This is
           <br />
@@ -107,15 +93,6 @@ const About = ({ onSignIn }: AboutProps) => {
           </span>
         </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-black/70 text-xl mb-12 font-sf-pro"
-        >
-          Your guardian angel for dining out safely.
-        </motion.p>
-
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -123,9 +100,9 @@ const About = ({ onSignIn }: AboutProps) => {
           className="mb-8"
         >
           <motion.div
-            className="inline-flex gap-4 bg-white/50 backdrop-blur-sm rounded-full px-8 py-4 shadow-xl outline outline-1 outline-offset-[-0.0625rem] outline-white/50"
+            className="inline-flex gap-4 bg-white/50 backdrop-blur-sm rounded-full px-10 py-3 shadow-xl outline outline-1 outline-offset-[-0.0625rem] outline-white/50"
             whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
@@ -148,7 +125,7 @@ const About = ({ onSignIn }: AboutProps) => {
           className="cursor-pointer px-12 py-4 bg-gradient-to-r from-[#56BECC] to-sky-500 rounded-full text-white font-sf-pro font-bold text-lg shadow-2xl mb-8 outline outline-1 outline-offset-[-0.0625rem] outline-white/50"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
+          transition={{ type: "spring", stiffness: 300 }}
           whileHover={{
             scale: 1.05,
             boxShadow: "0 25px 50px -12px rgba(86, 190, 204, 0.5)",
@@ -160,10 +137,10 @@ const About = ({ onSignIn }: AboutProps) => {
 
         <motion.button
           onClick={scrollToAboutGrid}
-          className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none hover:opacity-70 transition-opacity mx-auto group"
+          className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none hover:opacity-70 transition-opacity mx-auto group outline-none shadow-none p-0"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.2, delay: 0.1 }}
           whileHover={{ y: -5 }}
         >
           <p className="text-black font-sf-pro text-sm font-medium tracking-wider">

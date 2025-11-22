@@ -4,9 +4,10 @@ import { logoHoverVariants } from "../utils/animations";
 
 interface TopBarProps {
   onMenuClick?: () => void;
+  onAboutClick?: () => void;
 }
 
-const TopBar = ({ onMenuClick }: TopBarProps) => {
+const TopBar = ({ onMenuClick, onAboutClick }: TopBarProps) => {
   return (
     <div className="w-full mx-auto h-20 bg-white/50 rounded-3xl shadow-xl backdrop-blur-sm outline outline-1 outline-offset-[-0.0625rem] outline-white/50 overflow-y overflow-x"
     >
@@ -23,7 +24,10 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
           </div>
         </motion.div>
         <div className="hidden lg:flex items-center space-x-3 lg:space-x-6">
-          <div className="text-black text-xl font-thin lg:text-2xl font-sf-pro hover:text-gray-700 transition-colors cursor-pointer">
+          <div
+            onClick={onAboutClick}
+            className="text-black text-xl font-thin lg:text-2xl font-sf-pro hover:text-gray-700 transition-colors cursor-pointer"
+          >
             About
           </div>
           <div className="text-black text-xl font-thin lg:text-2xl font-sf-pro hover:text-gray-700 transition-colors cursor-pointer px-6">

@@ -147,18 +147,6 @@ const HaloAboutGrid = () => {
           </div>
         </motion.div>
 
-        {/* Divider with icon */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: false, amount: 0.5 }}
-          className="flex justify-center"
-        >
-          <div className="bg-white/50 backdrop-blur-sm rounded-full w-16 h-16 flex items-center justify-center shadow-xl outline outline-1 outline-offset-[-0.0625rem] outline-white/50">
-            <span className="text-4xl">🛡️</span>
-          </div>
-        </motion.div>
-
         {/* Second Hero Section - Personalized Allergy Management */}
         <motion.div
           className="flex items-center"

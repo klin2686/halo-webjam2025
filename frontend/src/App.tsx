@@ -16,6 +16,7 @@ const App = () => {
   const { isAuthenticated, isLoading } = useAuth();
   const [currentScreen, setCurrentScreen] = useState<string>("Dashboard");
   const [showAboutPage, setShowAboutPage] = useState<boolean>(true);
+  const [viewingAbout, setViewingAbout] = useState<boolean>(false);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -28,6 +29,10 @@ const App = () => {
       return <HaloAboutPage onSignIn={() => setShowAboutPage(false)} />;
     }
     return <UserLogin />;
+  }
+
+  if (viewingAbout) {
+    return <HaloAboutPage onSignIn={() => setViewingAbout(false)} />;
   }
 
   return (
@@ -45,7 +50,10 @@ const App = () => {
         variants={pageLoadVariants}
         className="relative z-10 h-full w-full flex flex-col p-[1rem] md:p-[1.5rem] lg:p-[2rem] gap-[1rem]"
       >
-        <TopBar onMenuClick={() => setIsSidebarOpen(true)} />
+        <TopBar
+          onMenuClick={() => setIsSidebarOpen(true)}
+          onAboutClick={() => setViewingAbout(true)}
+        />
 
         <div className="flex-1 flex gap-[1rem] min-h-0 relative">
           {/* Desktop Sidebar */}

@@ -56,6 +56,32 @@
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
+/* Custom minimalistic scrollbar styles */
+*:not(.no-scrollbar)::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*:not(.no-scrollbar)::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*:not(.no-scrollbar)::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+*:not(.no-scrollbar)::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* Firefox scrollbar */
+*:not(.no-scrollbar) {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
