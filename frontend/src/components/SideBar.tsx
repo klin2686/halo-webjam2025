@@ -40,10 +40,10 @@ const SideBar = ({ currentScreen, onScreenChange }: SideBarProps) => {
       initial="hidden"
       animate="visible"
       variants={sidebarVariants}
-      className="h-full w-full relative bg-white/50 rounded-3xl shadow-xl backdrop-blur-sm outline outline-1 outline-offset-[-0.0625rem] outline-white/50 overflow-y"
+      className="h-full w-full min-h-[300px] relative bg-white/50 rounded-3xl shadow-xl backdrop-blur-sm outline outline-1 outline-offset-[-0.0625rem] outline-white/50 overflow-y"
     >
-      <div className="flex flex-col justify-between h-full p-[1rem] overflow-y-auto">
-        <div className="flex flex-col flex-1 min-h-0">
+      <div className="flex flex-col h-full p-[1rem]">
+        <div className="flex flex-col flex-1 min-h-0 overflow-y-auto">
           <SideBarProfile
             picture={user?.profile_picture || defaultUser}
             name={user?.name || user?.email || "User"}
@@ -75,6 +75,7 @@ const SideBar = ({ currentScreen, onScreenChange }: SideBarProps) => {
           <div className="flex justify-center w-full">
             <hr className="w-9/10 justify-center pt-[1rem] opacity-40"></hr>
           </div>
+
           <SideBarElement
             element="Account"
             logo={sidebarAccount}
@@ -92,7 +93,7 @@ const SideBar = ({ currentScreen, onScreenChange }: SideBarProps) => {
           />
         </div>
 
-        <div className="flex flex-col mt-auto">
+        <div className="flex flex-col flex-shrink-0">
           <div className="flex justify-center w-full">
             <hr className="w-9/10 justify-center pt-[1rem] opacity-40"></hr>
           </div>
