@@ -2,8 +2,6 @@
 
 > Created by: Kenneth Lin, Ronan Nguyen, Isaac Phoon, Ethan Zhao
 
-> Built for ICSSC's WebJam 2025
-
 <img width="1919" height="1199" alt="Halo Sign In" src="https://github.com/user-attachments/assets/7193a1d3-b29a-4dfa-8a7b-ec610c5720cf" />
 
 <img width="1919" height="1199" alt="Halo Dashboard" src="https://github.com/user-attachments/assets/a408ae76-db67-4a91-a9c3-cfd473f9cb85" />
