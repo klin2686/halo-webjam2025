@@ -10,36 +10,7 @@
 
 ---
 
-## Table of Contents
-
-- [Table of Contents](#table-of-contents)
-- [About](#about)
-  - [Why Halo?](#why-halo)
-- [Demo](#demo)
-- [Features](#features)
-  - [Authentication \& User Management](#authentication--user-management)
-  - [Allergy Profile Management](#allergy-profile-management)
-  - [AI-Powered Menu Analysis](#ai-powered-menu-analysis)
-  - [Menu History \& Management](#menu-history--management)
-  - [User Interface](#user-interface)
-- [Tech Stack](#tech-stack)
-  - [Backend](#backend)
-  - [Frontend](#frontend)
-  - [Deployment \& Infrastructure](#deployment--infrastructure)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
-  - [Quick Start Guide](#quick-start-guide)
-  - [Common Use Cases](#common-use-cases)
-- [Project Structure](#project-structure)
-- [API Documentation](#api-documentation)
-  - [API Endpoints Overview](#api-endpoints-overview)
-- [Contributing](#contributing)
-- [License](#license)
-- [Authors](#authors)
-
-## About
+# About
 
 **The Problem:** Severe allergic reactions in restaurants are alarmingly common, yet many menus lack complete allergen information. Restaurant staff are often misinformed or simply don't have access to detailed ingredient lists, putting diners with food allergies at risk.
 
@@ -53,9 +24,7 @@
 - **Confidence Transparency**: Every detection includes a confidence score (0-10)
 - **FDA Aligned**: Covers all 9 major allergen categories recognized by the FDA
 
----
-
-## Demo
+# Demo
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/7193a1d3-b29a-4dfa-8a7b-ec610c5720cf" alt="Halo Sign In" width="800">
@@ -65,9 +34,7 @@
   <p><em>Intuitive dashboard with color-coded allergen detection and confidence scores</em></p>
 </div>
 
----
-
-## Features
+# Features
 
 ### Authentication & User Management
 
@@ -106,11 +73,9 @@
 - **Modern Typography**: SF Pro font for a clean, Apple-inspired look
 - **Mobile Navigation**: Intuitive sidebar drawer for small screens
 
----
+# Tech Stack
 
-## Tech Stack
-
-### Backend
+## Backend
 
 | Technology | Purpose |
 |------------|---------|
@@ -125,7 +90,7 @@
 | **Gunicorn** | Production WSGI server |
 | **Flask-CORS** | Cross-origin resource sharing |
 
-### Frontend
+## Frontend
 
 | Technology | Purpose |
 |------------|---------|
@@ -135,17 +100,15 @@
 | **Tailwind CSS** | Utility-first styling |
 | **Framer Motion** | Animation library |
 
-### Deployment & Infrastructure
+## Deployment & Infrastructure
 
 - **Backend Hosting**: Heroku with PostgreSQL add-on
 - **Frontend Hosting**: Vercel
 - **Version Control**: Git & GitHub
 
----
+# Getting Started
 
-## Getting Started
-
-### Prerequisites
+## Prerequisites
 
 Before you begin, ensure you have the following installed:
 
@@ -160,7 +123,7 @@ You'll also need API keys:
   - Obtain OAuth 2.0 credentials (web application)
   - Generate Gemini API key
 
-### Installation
+## Installation
 
 1. **Clone the repository**
 
@@ -173,11 +136,9 @@ You'll also need API keys:
    - [Backend Setup Guide](backend/README.md)
    - [Frontend Setup Guide](frontend/README.md)
 
----
+# Usage
 
-## Usage
-
-### Quick Start Guide
+## Quick Start Guide
 
 1. **Create an account** or sign in with Google
 
@@ -200,16 +161,14 @@ You'll also need API keys:
    - Give your menus a custom name in the History page
    - Access saved menus anytime
 
-### Common Use Cases
+## Common Use Cases
 
 - **Restaurant Dining**: Quickly scan menus before ordering
 - **Takeout Orders**: Verify allergen information when ordering delivery
 - **Travel Planning**: Save menus from your favorite safe restaurants
 - **Group Dining**: Check multiple menu items at once for shared meals
 
----
-
-## Project Structure
+# Project Structure
 
 This is a **monorepo** containing both the backend API and frontend application:
 
@@ -249,15 +208,13 @@ halo/
 └── .gitignore                    # Git ignore rules
 ```
 
----
-
-## API Documentation
+# API Documentation
 
 Comprehensive API documentation is available in [backend/API_REFERENCE.md](backend/API_REFERENCE.md).
 
-### API Endpoints Overview
+## API Endpoints Overview
 
-**Authentication**
+### Authentication
 
 - `POST /api/auth/register` - Create new account
 - `POST /api/auth/login` - Email/password login
@@ -267,14 +224,14 @@ Comprehensive API documentation is available in [backend/API_REFERENCE.md](backe
 - `PUT /api/auth/update-profile` - Update user profile
 - `PUT /api/auth/change-password` - Change password
 
-**Allergy Management**
+### Allergy Management
 
 - `GET /api/allergy` - Get user allergies
 - `POST /api/allergy` - Add new allergy
 - `PUT /api/allergy/<id>` - Update allergy severity
 - `DELETE /api/allergy/<id>` - Remove allergy
 
-**Menu Processing**
+### Menu Processing
 
 - `POST /api/process-menu` - Upload and analyze menu photo
 - `POST /api/process-manual-input` - Analyze manually entered items
@@ -283,13 +240,11 @@ Comprehensive API documentation is available in [backend/API_REFERENCE.md](backe
 - `PUT /api/menu-uploads/<id>` - Rename saved menu
 - `DELETE /api/menu-uploads/<id>` - Delete saved menu
 
-**Health Check**
+### Health Check
 
 - `GET /api/health` - API health status
 
----
-
-## Contributing
+# Contributing
 
 Contributions are welcome! If you'd like to improve Halo, please follow these steps:
 
@@ -301,15 +256,11 @@ Contributions are welcome! If you'd like to improve Halo, please follow these st
 
 Please ensure your code follows the existing style and includes appropriate tests.
 
----
-
-## License
+# License
 
 This project is licensed under the MIT License - see [LICENSE](LICENSE) for more details.
 
----
-
-## Authors
+# Authors
 
 **Created by:**
 
