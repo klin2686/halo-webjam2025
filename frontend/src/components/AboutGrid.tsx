@@ -56,7 +56,7 @@ const AboutGrid = ({ onSignIn }: AboutGridProps) => {
       className="py-20 px-4 relative"
     >
       {/* Background overlay */}
-      <div className="absolute inset-0 bg-white/25 z-0"></div>
+      <div className="absolute inset-0 bg-white/30 z-0"></div>
 
       <div className="max-w-7xl mx-auto space-y-12 relative z-10">
         {/* First Hero Section - AI-Powered Menu Analysis */}
@@ -78,15 +78,18 @@ const AboutGrid = ({ onSignIn }: AboutGridProps) => {
                   </span>
                 </div>
               </motion.div>
-              <motion.h2
+              {/* <motion.h2
                 variants={childVariants}
                 className="text-3xl min-[355px]:text-4xl sm:text-5xl min-[550px]:text-6xl font-bold text-black mb-6 font-sf-pro hover:text-[#56BECC] transition-colors duration-300"
               >
-                AI-Powered Menu Intelligence
-              </motion.h2>
+                AI-Powered Menu Analysis
+              </motion.h2> */}
+              <h2 className="text-3xl min-[355px]:text-4xl sm:text-5xl min-[550px]:text-6xl font-bold text-[#154359] mb-6 font-sf-pro">
+                AI-Powered Menu Analysis
+              </h2>
               <motion.p
                 variants={childVariants}
-                className="text-sm min-[355px]:text-base sm:text-lg md:text-xl text-black/70 font-sf-pro mb-6"
+                className="text-sm min-[355px]:text-base sm:text-lg md:text-xl text-black/80 font-semibold font-sf-pro mb-6"
               >
                 Simply upload a photo of any restaurant menu or manually enter
                 dishes, and let Google Gemini AI do the heavy lifting. Our
@@ -96,24 +99,24 @@ const AboutGrid = ({ onSignIn }: AboutGridProps) => {
               </motion.p>
               <motion.p
                 variants={childVariants}
-                className="text-sm min-[355px]:text-base sm:text-lg md:text-xl text-black/60 font-sf-pro"
+                className="text-sm min-[355px]:text-base sm:text-lg md:text-xl text-black/80 font-semibold font-sf-pro"
               >
-                No more guessing games or awkward questions – know what's safe
+                No more guessing games or awkward questions—spot the dangers
                 before you order.
               </motion.p>
               <motion.div variants={childVariants} className="mt-6 flex gap-3">
-                <div className="text-center bg-white/50 backdrop-blur-sm rounded-full px-4 py-2 shadow-xl outline outline-1 outline-offset-[-0.0625rem] outline-white/50">
-                  <span className="text-[#2D97B3] font-sf-pro font-medium text-sm">
+                <div className="text-center bg-white/20 backdrop-blur-3xl rounded-full px-4 py-2 shadow-xl outline outline-1 outline-offset-[-0.0625rem] outline-white/50">
+                  <span className="text-white font-sf-pro font-medium text-sm">
                     Photo Upload
                   </span>
                 </div>
-                <div className="text-center bg-white/50 backdrop-blur-sm rounded-full px-4 py-2 shadow-xl outline outline-1 outline-offset-[-0.0625rem] outline-white/50">
-                  <span className="text-[#2D97B3] font-sf-pro font-medium text-sm">
+                <div className="text-center bg-white/20 backdrop-blur-3xl rounded-full px-4 py-2 shadow-xl outline outline-1 outline-offset-[-0.0625rem] outline-white/50">
+                  <span className="text-white font-sf-pro font-medium text-sm">
                     Manual Entry
                   </span>
                 </div>
-                <div className="text-center bg-white/50 backdrop-blur-sm rounded-full px-4 py-2 shadow-xl outline outline-1 outline-offset-[-0.0625rem] outline-white/50">
-                  <span className="text-[#2D97B3] font-sf-pro font-medium text-sm">
+                <div className="text-center bg-white/20 backdrop-blur-3xl rounded-full px-4 py-2 shadow-xl outline outline-1 outline-offset-[-0.0625rem] outline-white/50">
+                  <span className="text-white font-sf-pro font-medium text-sm">
                     Instant Results
                   </span>
                 </div>
@@ -170,15 +173,18 @@ const AboutGrid = ({ onSignIn }: AboutGridProps) => {
                   </span>
                 </div>
               </motion.div>
-              <motion.h2
+              {/* <motion.h2
                 variants={childVariants}
-                className="text-3xl min-[355px]:text-4xl sm:text-5xl min-[550px]:text-6xl font-bold text-black mb-6 font-sf-pro hover:text-sky-500 transition-colors duration-300"
+                className="text-3xl min-[355px]:text-4xl sm:text-5xl min-[550px]:text-6xl font-bold text-black mb-6 font-sf-pro hover:text-[#0b2154] transition-colors duration-300"
               >
                 Your Allergies, Your Safety
-              </motion.h2>
+              </motion.h2> */}
+              <h2 className="text-3xl min-[355px]:text-4xl sm:text-5xl min-[550px]:text-6xl font-bold text-[#14245e] mb-6 font-sf-pro">
+                Your Allergies, Your Safety
+              </h2>
               <motion.p
                 variants={childVariants}
-                className="text-sm min-[355px]:text-base sm:text-lg md:text-xl text-black/70 font-sf-pro mb-6"
+                className="text-sm min-[355px]:text-base sm:text-lg md:text-xl text-black/80 font-semibold font-sf-pro mb-6"
               >
                 Build your personalized allergy profile with severity levels,
                 and watch as Halo instantly matches detected allergens against
@@ -187,25 +193,25 @@ const AboutGrid = ({ onSignIn }: AboutGridProps) => {
               </motion.p>
               <motion.p
                 variants={childVariants}
-                className="text-sm min-[355px]:text-base sm:text-lg md:text-xl text-black/60 font-sf-pro"
+                className="text-sm min-[355px]:text-base sm:text-lg md:text-xl text-black/80 font-semibold font-sf-pro"
               >
                 Search through menu items, filter by allergen, and keep a
-                complete history of analyzed menus – dining out has never been
-                this safe.
+                complete history of analyzed menus—dining out has never been
+                this safe and easy.
               </motion.p>
               <motion.div variants={childVariants} className="mt-6 flex gap-3">
-                <div className="text-center bg-white/50 backdrop-blur-sm rounded-full px-4 py-2 shadow-xl outline outline-1 outline-offset-[-0.0625rem] outline-white/50">
-                  <span className="text-sky-500 font-sf-pro font-medium text-sm">
+                <div className="text-center bg-white/20 backdrop-blur-3xl rounded-full px-4 py-2 shadow-xl outline outline-1 outline-offset-[-0.0625rem] outline-white/50">
+                  <span className="text-white font-sf-pro font-medium text-sm">
                     Smart Matching
                   </span>
                 </div>
-                <div className="text-center bg-white/50 backdrop-blur-sm rounded-full px-4 py-2 shadow-xl outline outline-1 outline-offset-[-0.0625rem] outline-white/50">
-                  <span className="text-sky-500 font-sf-pro font-medium text-sm">
+                <div className="text-center bg-white/20 backdrop-blur-3xl rounded-full px-4 py-2 shadow-xl outline outline-1 outline-offset-[-0.0625rem] outline-white/50">
+                  <span className="text-white font-sf-pro font-medium text-sm">
                     Color Coding
                   </span>
                 </div>
-                <div className="text-center bg-white/50 backdrop-blur-sm rounded-full px-4 py-2 shadow-xl outline outline-1 outline-offset-[-0.0625rem] outline-white/50">
-                  <span className="text-sky-500 font-sf-pro font-medium text-sm">
+                <div className="text-center bg-white/20 backdrop-blur-3xl rounded-full px-4 py-2 shadow-xl outline outline-1 outline-offset-[-0.0625rem] outline-white/50">
+                  <span className="text-white font-sf-pro font-medium text-sm">
                     Easy Search
                   </span>
                 </div>

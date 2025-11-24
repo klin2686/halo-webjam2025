@@ -14,7 +14,7 @@ const About = ({ onSignIn }: AboutProps) => {
   return (
     <section className="min-h-screen flex flex-col items-center justify-center px-[1rem] md:px-[2rem] relative overflow-x-hidden">
       {/* Background overlay */}
-      <div className="absolute inset-0 bg-white/25 z-0"></div>
+      <div className="absolute inset-0 bg-white/30 z-0"></div>
 
       {/* Animated background circles with glassmorphism */}
       <motion.div
