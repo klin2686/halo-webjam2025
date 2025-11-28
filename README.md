@@ -31,11 +31,14 @@ Halo is an AI-powered food allergy management application that helps users safel
 # Demo
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/7193a1d3-b29a-4dfa-8a7b-ec610c5720cf" alt="Halo Sign In" width="800">
+  <img src="https://github.com/user-attachments/assets/372ddfcb-4ef4-41d8-be55-7821ee174013" alt="Halo Sign In" width="800">
   <p><em>Clean, modern authentication with Google OAuth and email/password options</em></p>
 
-  <img src="https://github.com/user-attachments/assets/a408ae76-db67-4a91-a9c3-cfd473f9cb85" alt="Halo Dashboard" width="800">
+  <img src="https://github.com/user-attachments/assets/77812692-56cf-4115-b00b-d47c35c7bde2" alt="Halo Dashboard" width="800">
   <p><em>Intuitive dashboard with color-coded allergen detection and confidence scores</em></p>
+
+  <img src="https://github.com/user-attachments/assets/30c790c3-021c-4dd8-93e0-fc0de44ac9ee" alt="Halo History" width="800">
+  <p><em>History page with ability manage and view previous menu uploads</em></p>
 </div>
 
 # Features
